@@ -18,16 +18,19 @@ output:
 ![](Yama.jpeg)
 
 
-## Education {.tabset}
+## Columbia University {.tabset}
 
 ### Degree
-Master of Public Health, Columbia Mailman School of Public Health
+Master of Public Health
 
 ### Department
 Epidemiology
 
 ### Certificate
 Applied Biostatistics 
+
+### Class
+2024
 
 ## Research {.tabset}
 
