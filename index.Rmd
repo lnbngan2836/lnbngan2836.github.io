@@ -1,0 +1,48 @@
+---
+title: "NGAN LE"
+output: 
+  html_document:
+    code_folding: hide
+    toc: true # toc = table of content
+    toc_float: true # floating toc
+---
+
+## Tabbies {.tabset}
+### Laundry
+![](Laundry2.jpeg)
+
+### Baadshah
+![](Baadshah.jpeg)
+
+### Yama
+![](Yama.jpeg)
+
+
+## Education {.tabset}
+
+### Degree
+Master of Public Health, Columbia Mailman School of Public Health
+
+### Department
+Epidemiology
+
+### Certificate
+Applied Biostatistics 
+
+## Research {.tabset}
+
+### HAIVN
+1. Adapting Long-acting Pre-Exposure Prophylaxis (PrEP) and Antiretroviral (ARV) treatments to Vietnam.
+2. South Vietnam HIV-care Technical Support program effectiveness evaluation. 
+
+### CUIMC NBDC 
+Food Insecurity and Housing Instability's Impact on Diabetes Morbidity and Diabetes Distress.
+
+### CUIMC Division of Infectious Disease
+Lesotho PrEP initiation rate among Adolescent Girls and Young Women. 
+
+### The Chen Lab
+1. Post-Transition State Bifurcations in Reactions Between Boroles and Unsaturated Hydrocarbons.
+2. Photochemical Dearomative Cycloadditions of Quinoline and Alkenes.
+
+
