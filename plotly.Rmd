@@ -63,7 +63,8 @@ cleaned_data %>%
   mutate(aisle = fct_reorder(aisle, n)) %>% 
   plot_ly(
     x = ~department, y = ~n, type = "scatter", mode = "markers",
-    color = ~department, text = ~text_label, alpha = 0.5)
+    color = ~department, text = ~text_label, alpha = 0.5, 
+    colors = scales::viridis_pal()(length(unique(cleaned_data$department))))
 ```
 
 
