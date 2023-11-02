@@ -1,22 +1,33 @@
 <!DOCTYPE html>
-
-<html>
-
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-<meta charset="utf-8" />
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-
 
 
 
 <title>Dashboard</title>
 
+<meta property="og:title" content="Dashboard" />
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+<link rel="icon" href="data:image/x-icon;" type="image/x-icon">
+
+
+<script type="text/javascript">
+window.FlexDashboardComponents = [];
+</script>
+
+<script id="flexdashboard-navbar" type="application/json">
+[{"title":"Source Code","icon":"fa-code","href":"source_embed","align":"right"}]
+</script>
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -29,9 +40,16 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/stickytableheaders-0.1.19/jquery.stickytableheaders.min.js"></script>
+<link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet" />
+<link href="site_libs/value-box-accent-static-0.6.2/theme-cosmo-value-box.css" rel="stylesheet" />
+<link href="site_libs/featherlight-1.3.5/featherlight.min.css" rel="stylesheet" />
+<script src="site_libs/featherlight-1.3.5/featherlight.min.js"></script>
+<link href="site_libs/prism-1.4.1/prism.css" rel="stylesheet" />
+<script src="site_libs/prism-1.4.1/prism.js"></script>
+<link href="site_libs/flexdashboard-css-0.6.2/flexdashboard.min.css" rel="stylesheet" />
+<link href="site_libs/flexdashboard-css-0.6.2/theme-cosmo.css" rel="stylesheet" />
 <script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <script src="site_libs/plotly-binding-4.10.3/plotly.js"></script>
 <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
@@ -39,193 +57,104 @@
 <script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 <link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
-<link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet" />
-
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+/*
+  CSS for flexdashboard.js' use of Sly(). The sizing/position of this CSS needs to be
+  applied _before_ flexdashboard.js initializes, which is why this CSS has been pulled
+  out from flexdashboard.scss and inlined in the document's head.
+*/
 
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
-
-
-
-
-
-
-
-
-
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-img {
-  max-width:100%;
-}
-.tabbed-pane {
-  padding-top: 12px;
-}
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
+.storyboard-nav button {
+  background: transparent;
+  border: 0;
+  opacity: .3;
   outline: none;
-}
-summary {
-  display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
   padding: 0;
 }
-</style>
 
+.storyboard-nav button:hover,
+.storyboard-nav button:hover {
+  opacity: .5;
+}
 
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
+.storyboard-nav button:disabled,
+.storyboard-nav button:disabled {
+  opacity: .1;
 }
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
+
+.storyboard-nav .sbnext,
+.storyboard-nav .sbprev {
+  float: left;
+  width: 2%;
+  height: 120px;
 }
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
+
+.storyboard-nav .sbprev {
+  text-align: left;
+  width: 2%;
 }
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
+
+.storyboard-nav .sbnext {
   float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
-
-<!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  text-align: right;
+  margin-right: 8px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+.storyboard-nav .sbframelist {
+  margin: 0 auto;
+  width: 94%;
+  height: 120px;
+  overflow: hidden;
+  text-shadow: none;
+  margin-bottom: 8px;
 }
 
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
-  border: none;
+.storyboard-nav .sbframelist ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
+.storyboard-nav .sbframelist ul li {
+  float: left;
+  width: 270px;
+  height: 100%;
+  padding: 10px 10px 10px 10px;
+  margin-right: 8px;
+  text-align: left;
+  cursor: pointer;
 }
 
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
+.storyboard-nav .sbframelist ul li:last-child {
+  margin-right: 0px;
 }
 
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
+.sbframe-commentary {
+  width: 300px;
 }
 
-.tabset-dropdown > .nav-tabs > li {
+.sbframe-commentary ul {
+  padding-left: 22px;
+}
+
+.sbframe.active {
+  display: flex;
+}
+
+.sbframe:not(.active) {
   display: none;
 }
+@media only screen and (min-width: 768px) {
+html, body {
+  height: 100%;
+}
+
+#dashboard-container {
+  height: 100%;
+}
+}
 </style>
-
-<!-- code folding -->
-
 
 
 
@@ -233,146 +162,1863 @@ $(document).ready(function () {
 
 <body>
 
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
 
-<div class="container-fluid main-container">
+<span class="navbar-logo pull-left">
+  
+</span>
+<span class="navbar-brand">
+  Dashboard
+  <span class="navbar-author">
+        </span>
+</span>
 
-
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Home</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="resume.html">Résumé</a>
-</li>
-<li>
-  <a href="mailto:&lt;nl2836@cumc.columbia.edu&gt;">
-    <span class="fa fa-at fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://www.linkedin.com/in/ngan-sam-le/">
-    <span class="fa fa-linkedin fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="http://github.com/lnbngan2836/">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
-<div id="header">
-
-
-
-<h1 class="title toc-ignore">Dashboard</h1>
+<button id="navbar-button" type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
 
 </div>
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav navbar-left">
+</ul>
+<ul class="nav navbar-nav navbar-right">
+</ul>
+</div><!--/.nav-collapse-->
+</div><!--/.container-->
+</div><!--/.navbar-->
 
+<script type="text/javascript">
+
+
+var FlexDashboard = (function () {
+
+  // initialize options
+  var _options = {};
+
+  var FlexDashboard = function() {
+
+    // default options
+    _options = $.extend(_options, {
+      theme: "cosmo",
+      fillPage: false,
+      orientation: 'columns',
+      storyboard: false,
+      defaultFigWidth: 576,
+      defaultFigHeight: 461,
+      defaultFigWidthMobile: 360,
+      defaultFigHeightMobile: 461,
+      isMobile: false,
+      isPortrait: false,
+      resize_reload: true
+    });
+  };
+
+  function init(options) {
+
+    // extend default options
+    $.extend(true, _options, options);
+
+    // add ids to sections that don't have them (pandoc won't assign ids
+    // to e.g. sections with titles consisting of only chinese characters)
+    var nextId = 1;
+    $('.level1:not([id]),.level2:not([id]),.level3:not([id])').each(function() {
+      $(this).attr('id', 'dashboard-' + nextId++);
+    });
+
+    // find navbar items
+    var navbarItems = $('#flexdashboard-navbar');
+    if (navbarItems.length)
+      navbarItems = JSON.parse(navbarItems.html());
+    addNavbarItems(navbarItems);
+
+    // find the main dashboard container
+    var dashboardContainer = $('#dashboard-container');
+
+    // resolve mobile classes
+    resolveMobileClasses(dashboardContainer);
+
+    // one time global initialization for components
+    componentsInit(dashboardContainer);
+
+    // look for a global sidebar
+    var globalSidebar = dashboardContainer.find(".section.level1.sidebar");
+    if (globalSidebar.length > 0) {
+
+      // global layout for fullscreen displays
+      if (!isMobilePhone()) {
+
+         // hoist it up to the top level
+         globalSidebar.insertBefore(dashboardContainer);
+
+         // lay it out (set width/positions)
+         layoutSidebar(globalSidebar, dashboardContainer);
+
+      // tuck sidebar into first page for mobile phones
+      } else {
+
+        // convert it into a level3 section
+        globalSidebar.removeClass('sidebar');
+        globalSidebar.removeClass('level1');
+        globalSidebar.addClass('level3');
+        var h1 = globalSidebar.children('h1');
+        var h3 = $('<h3></h3>');
+        h3.append(h1.contents());
+        h3.insertBefore(h1);
+        h1.detach();
+
+        // move it into the first page
+        var page = dashboardContainer.find('.section.level1').first();
+        if (page.length > 0)
+          page.prepend(globalSidebar);
+      }
+    }
+
+    // look for pages to layout
+    var pages = $('div.section.level1');
+    if (pages.length > 0) {
+
+        // find the navbar and collapse on clicked
+        var navbar = $('#navbar');
+        navbar.on("click", "a[data-toggle!=dropdown]", null, function () {
+           navbar.collapse('hide');
+        });
+
+        // envelop the dashboard container in a tab content div
+        dashboardContainer.wrapInner('<div class="tab-content"></div>');
+
+        pages.each(function(index) {
+
+          // lay it out
+          layoutDashboardPage($(this));
+
+          // add it to the navbar
+          addToNavbar($(this), index === 0);
+
+        });
+
+    } else {
+
+      // remove the navbar and navbar button if we don't
+      // have any navbuttons
+      if (navbarItems.length === 0) {
+        $('#navbar').remove();
+        $('#navbar-button').remove();
+      }
+
+      // add the storyboard class if requested
+      if (_options.storyboard)
+        dashboardContainer.addClass('storyboard');
+
+      // layout the entire page
+      layoutDashboardPage(dashboardContainer);
+    }
+
+    // if we are in shiny we need to trigger a window resize event to
+    // force correct layout of shiny-bound-output elements
+    if (isShinyDoc())
+      $(window).trigger('resize');
+
+    // make main components visible
+    $('.section.sidebar').css('visibility', 'visible');
+    dashboardContainer.css('visibility', 'visible');
+
+    // handle location hash
+    handleLocationHash();
+
+    // intialize prism highlighting
+    initPrismHighlighting();
+
+    // record mobile and orientation state then register a handler
+    // to refresh if resize_reload is set to true and it changes
+    _options.isMobile = isMobilePhone();
+    _options.isPortrait = isPortrait();
+    if (_options.resize_reload) {
+      $(window).on('resize', function() {
+        if (_options.isMobile !== isMobilePhone() ||
+            _options.isPortrait !== isPortrait()) {
+          window.location.reload();
+        }
+      });
+    } else {
+      // if in desktop mode and resizing to mobile, make sure the heights are 100%
+      // This enforces what `fillpage.css` does for "wider" pages.
+      // Since we are not reloading once the page becomes small, we need to force the height to 100%
+      // This is a new situation introduced when `_options.resize_reload` is `false`
+      if (! _options.isMobile) {
+        // only add if `fillpage.css` was added in the first place
+        if (_options.fillPage) {
+          // fillpage.css
+          $("html,body,#dashboard").css("height", "100%");
+        }
+      }
+    }
+    // trigger layoutcomplete event
+    dashboardContainer.trigger('flexdashboard:layoutcomplete');
+  }
+
+  function resolveMobileClasses(dashboardContainer) {
+     // add top level layout class
+    dashboardContainer.addClass(isMobilePhone() ? 'mobile-layout' :
+                                                  'desktop-layout');
+
+    // look for .mobile sections and add .no-mobile to their peers
+    var mobileSections = $('.section.mobile');
+    mobileSections.each(function() {
+       var id = $(this).attr('id');
+       var nomobileId = id.replace(/-\d+$/, '');
+       $('#' + nomobileId).addClass('no-mobile');
+    });
+  }
+
+  function addNavbarItems(navbarItems) {
+
+    var navbarLeft = $('ul.navbar-left');
+    var navbarRight = $('ul.navbar-right');
+
+    for (var i = 0; i<navbarItems.length; i++) {
+
+      // get the item
+      var item = navbarItems[i];
+
+      // determine the container
+      var container = null;
+      if (item.align === "left")
+        container = navbarLeft;
+      else
+        container = navbarRight;
+
+      // navbar menu if we have multiple items
+      if (item.items) {
+        var menu = navbarMenu(null, item.icon, item.title, container);
+        for (var j = 0; j<item.items.length; j++) {
+          var subItem = item.items[j];
+          var li = $('<li></li>');
+          var a = navbarLink(subItem.icon, subItem.title, subItem.href, subItem.target);
+          a.removeClass("nav-link").addClass("dropdown-item");
+          li.append(a);
+          menu.append(li);
+        }
+      } else {
+        var li = $('<li class="nav-item"></li>');
+        li.append(navbarLink(item.icon, item.title, item.href, item.target));
+        container.append(li);
+      }
+    }
+  }
+
+  // create or get a reference to an existing dropdown menu
+  function navbarMenu(id, icon, title, container) {
+    var existingMenu = [];
+    if (id)
+      existingMenu = container.children('#' + id);
+    if (existingMenu.length > 0) {
+      return existingMenu.children('ul');
+    } else {
+      var li = $('<li class="nav-item"></li>');
+      if (id)
+        li.attr('id', id);
+      li.addClass('dropdown');
+      // auto add "Share" title on mobile if necessary
+      if (!title && icon && (icon === "fa-share-alt") && isMobilePhone())
+        title = "Share";
+      if (title) {
+        title = title + ' <span class="caret"></span>';
+      }
+      var a = navbarLink(icon, title, "#");
+      a.addClass('dropdown-toggle');
+      a.attr('data-toggle', 'dropdown');
+      a.attr('data-bs-toggle', 'dropdown');
+      a.attr('role', 'button');
+      a.attr('aria-expanded', 'false');
+      li.append(a);
+      var ul = $('<ul class="dropdown-menu"></ul>');
+      ul.attr('role', 'menu');
+      li.append(ul);
+      container.append(li);
+      return ul;
+    }
+  }
+
+  function addToNavbar(page, active) {
+
+    // capture the id and data-icon attribute (if any)
+    var id = page.attr('id');
+    var icon = page.attr('data-icon');
+    var navmenu = page.attr('data-navmenu');
+    var navmenuIcon = page.attr('data-navmenu-icon');
+
+    // get hidden state (transfer this to navbar)
+    var hidden = page.hasClass('hidden');
+    page.removeClass('hidden');
+
+    // sanitize the id for use with bootstrap tabs
+    id = id.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_');
+    page.attr('id', id);
+
+    // get the wrapper
+    var wrapper = page.closest('.dashboard-page-wrapper');
+
+    // move the id to the wrapper
+    page.removeAttr('id');
+    wrapper.attr('id', id);
+
+    // add the tab-pane class to the wrapper
+    wrapper.addClass('tab-pane');
+
+    // get a reference to the h1, discover its inner contens, then detach it
+    var h1 = wrapper.find('h1').first();
+    var title = h1.contents();
+    h1.detach();
+
+    // create a navbar item
+    var li = $('<li></li>');
+    var a = navbarLink(icon, title, '#' + id);
+    a.attr('data-toggle', 'tab');
+    a.attr('data-bs-toggle', 'tab');
+    li.append(a);
+
+    // add it to the navbar (or navbar menu if specified)
+    var container = $('ul.navbar-left');
+    if (navmenu) {
+      var menuId = navmenu.replace(/\s+/g, '');
+      var menu = navbarMenu(menuId, navmenuIcon, navmenu, container);
+      li.find("> a").removeClass("nav-link").addClass("dropdown-item");
+      menu.append(li);
+    } else {
+      li.addClass("nav-item")
+      container.append(li);
+    }
+
+    // mark active tab and corresponding nav menu item
+    if (active)
+      $(a).tab("show");
+
+    // hide it if requested
+    if (hidden)
+      li.addClass('hidden');
+  }
+
+  function navbarLink(icon, title, href, target) {
+
+    var a = $('<a class="nav-link"></a>');
+    if (icon) {
+
+      // get the name of the icon set and icon
+      var dashPos = icon.indexOf("-");
+      var iconSet = null;
+      var iconSplit = icon.split(" ");
+      if (iconSplit.length > 1) {
+        iconSet = iconSplit[0];
+        icon = iconSplit.slice(1).join(" ");
+      } else {
+        iconSet = icon.substring(0, dashPos);
+      }
+      var iconName = icon.substring(dashPos + 1);
+
+      // create the icon
+      var iconElement = $('<span class="' + iconSet + ' ' + icon + '"></span>');
+      if (title)
+        iconElement.css('margin-right', '7px');
+      a.append(iconElement);
+      // if href is null see if we can auto-generate based on icon (e.g. social)
+      if (!href)
+        maybeGenerateLinkFromIcon(iconName, a);
+    }
+    if (title)
+      a.append(title);
+
+    // add the href.
+    if (href) {
+      if (href === "source_embed") {
+        a.attr('href', '#');
+        a.attr('data-featherlight', "#flexdashboard-source-code");
+        a.featherlight({
+            beforeOpen: function(event){
+              $('body').addClass('unselectable');
+            },
+            afterClose: function(event){
+              $('body').removeClass('unselectable');
+            }
+        });
+      } else {
+        a.attr('href', href);
+      }
+    }
+
+    // add the arget
+    if (target)
+      a.attr('target', target);
+
+    return a;
+  }
+
+  // auto generate a link from an icon name (e.g. twitter) when possible
+  function maybeGenerateLinkFromIcon(iconName, a) {
+
+     var serviceLinks = {
+      "twitter": "https://twitter.com/share?text=" + encodeURIComponent(document.title) + "&url="+encodeURIComponent(location.href),
+      "facebook": "https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(location.href),
+      "linkedin": "https://www.linkedin.com/shareArticle?mini=true&url="+encodeURIComponent(location.href) + "&title=" + encodeURIComponent(document.title),
+      "pinterest": "https://pinterest.com/pin/create/link/?url="+encodeURIComponent(location.href) + "&description=" + encodeURIComponent(document.title)
+    };
+
+    var makeSocialLink = function(a, href) {
+      a.attr('href', '#');
+      a.on('click', function(e) {
+        e.preventDefault();
+        window.open(href);
+      });
+    };
+
+    $.each(serviceLinks, function(key, value) {
+      if (iconName.indexOf(key) !== -1)
+        makeSocialLink(a, value);
+    });
+  }
+
+  // layout a dashboard page
+  function layoutDashboardPage(page) {
+
+    // use a page wrapper so that free form content above the
+    // dashboard appears at the top rather than the side (as it
+    // would without the wrapper in a column orientation)
+    var wrapper = $('<div class="dashboard-page-wrapper"></div>');
+    page.wrap(wrapper);
+
+    // if there are no level2 or level3 headers synthesize a level3
+    // header to contain the (e.g. frame it, scroll container, etc.)
+    var headers = page.find('h2,h3');
+    if (headers.length === 0)
+      page.wrapInner('<div class="section level3"></div>');
+
+    // hoist up any content before level 2 or level 3 headers
+    var children = page.children();
+    children.each(function(index) {
+      if ($(this).hasClass('level2') || $(this).hasClass('level3'))
+        return false;
+      $(this).insertBefore(page);
+    });
+
+    // determine orientation and fillPage behavior for distinct media
+    var orientation, fillPage, storyboard;
+
+    // media: mobile phone
+    if (isMobilePhone()) {
+
+      // if there is a sidebar we need to ensure it's content
+      // is properly framed as an h3
+      var sidebar = page.find('.section.sidebar');
+      sidebar.removeClass('sidebar');
+      sidebar.wrapInner('<div class="section level3"></div>');
+      var h2 = sidebar.find('h2');
+      var h3 = $('<h3></h3>');
+      h3.append(h2.contents());
+      h3.insertBefore(h2);
+      h2.detach();
+
+      // wipeout h2 elements then enclose them in a single h2
+      var level2 = page.find('div.section.level2');
+      level2.each(function() {
+        level2.children('h2').remove();
+        level2.children().unwrap();
+      });
+      page.wrapInner('<div class="section level2"></div>');
+
+      // substitute mobile images
+      if (isPortrait()) {
+        var mobileFigures = $('img.mobile-figure');
+        mobileFigures.each(function() {
+          // get the src (might be base64 encoded)
+          var src = $(this).attr('src');
+
+          // find it's peer
+          var id = $(this).attr('data-mobile-figure-id');
+          var img = $('img[data-figure-id=' + id + "]");
+          img.attr('src', src)
+             .attr('width', _options.defaultFigWidthMobile)
+             .attr('height', _options.defaultFigHeightMobile);
+        });
+      }
+
+      // hoist storyboard commentary into it's own section
+      if (page.hasClass('storyboard')) {
+        var commentaryHR = page.find('div.section.level3 hr');
+        commentaryHR.each(function() {
+          var commentary = $(this).nextAll().detach();
+          var commentarySection = $('<div class="section level3"></div>');
+          commentarySection.append(commentary);
+          commentarySection.insertAfter($(this).closest('div.section.level3'));
+          $(this).remove();
+        });
+      }
+
+      // force a non full screen layout by columns
+      orientation = _options.orientation = 'columns';
+      fillPage = _options.fillPage = false;
+      storyboard = _options.storyboard = false;
+
+    // media: desktop
+    } else {
+
+      // determine orientation
+      orientation = page.attr('data-orientation');
+      if (orientation !== 'rows' && orientation != 'columns')
+        orientation = _options.orientation;
+
+      // determine storyboard mode
+      storyboard = page.hasClass('storyboard');
+
+      // fillPage based on options (force for storyboard)
+      fillPage = _options.fillPage || storyboard;
+
+      // handle sidebar
+      var sidebar = page.find('.section.level2.sidebar');
+      if (sidebar.length > 0)
+        layoutSidebar(sidebar, page);
+    }
+
+    // give it and it's parent divs height: 100% if we are in fillPage mode
+    if (fillPage) {
+      page.addClass('vertical-layout-fill');
+      page.css('height', '100%');
+      page.parents('div').css('height', '100%');
+    } else {
+      page.addClass('vertical-layout-scroll');
+    }
+
+    // perform the layout
+    if (storyboard)
+      layoutPageAsStoryboard(page);
+    else if (orientation === 'rows')
+      layoutPageByRows(page, fillPage);
+    else if (orientation === 'columns')
+      layoutPageByColumns(page, fillPage);
+  }
+
+  function layoutSidebar(sidebar, content) {
+
+    // get it out of the header hierarchy
+    sidebar = sidebar.first();
+    if (sidebar.hasClass('level1')) {
+      sidebar.removeClass('level1');
+      sidebar.children('h1').remove();
+    } else if (sidebar.hasClass('level2')) {
+      sidebar.removeClass('level2');
+      sidebar.children('h2').remove();
+    }
+
+    // determine width
+    var sidebarWidth = isTablet() ? 220 : 250;
+    var dataWidth = parseInt(sidebar.attr('data-width'));
+    if (dataWidth)
+      sidebarWidth = dataWidth;
+
+    // set the width and shift the page right to accomodate the sidebar
+    sidebar.css('width', sidebarWidth + 'px');
+    content.css('padding-left', sidebarWidth + 'px');
+
+    // wrap it's contents in a form
+    sidebar.wrapInner($('<form></form>'));
+  }
+
+  function layoutPageAsStoryboard(page) {
+
+    // create storyboard navigation
+    var nav = $('<div class="storyboard-nav"></div>');
+
+    // add navigation buttons
+    var prev = $('<button class="sbprev"><i class="fa fa-angle-left"></i></button>');
+    nav.append(prev);
+    var next= $('<button class="sbnext"><i class="fa fa-angle-right"></i></button>');
+    nav.append(next);
+
+    // add navigation frame
+    var frameList = $('<div class="sbframelist"></div>');
+    nav.append(frameList);
+    var ul = $('<ul></ul>');
+    frameList.append(ul);
+
+     // find all the level3 sections (those are the storyboard frames)
+    var frames = page.find('div.section.level3');
+    frames.each(function() {
+
+      // mark it
+      $(this).addClass('sbframe');
+
+      // divide it into chart content and (optional) commentary
+      $(this).addClass('dashboard-column-orientation');
+
+      // stuff the chart into it's own div w/ flex
+      $(this).wrapInner('<div class="sbframe-component"></div>');
+      setFlex($(this), 1);
+      var frame = $(this).children('.sbframe-component');
+
+      // extract the title from the h3
+      var li = $('<li></li>');
+      var h3 = frame.children('h3');
+      li.append(h3.contents());
+      h3.detach();
+      ul.append(li);
+
+      // extract commentary
+      var hr = frame.children('hr');
+      if (hr.length) {
+        var commentary = hr.nextAll().detach();
+        hr.remove();
+        var commentaryFrame = $('<div class="sbframe-commentary"></div>');
+        commentaryFrame.addClass('flowing-content-shim');
+        commentaryFrame.addClass('flowing-content-container');
+        commentaryFrame.append(commentary);
+        $(this).append(commentaryFrame);
+
+        // look for a data-commentary-width attribute
+        var commentaryWidth = $(this).attr('data-commentary-width');
+        if (commentaryWidth)
+          commentaryFrame.css('width', commentaryWidth + 'px');
+      }
+
+      // layout the chart (force flex)
+      var result = layoutChart(frame, true);
+
+      // ice the notes if there are none
+      if (!result.notes)
+        frame.find('.chart-notes').remove();
+
+      // set flex on chart
+      setFlex(frame, 1);
+    });
+
+    // create a div to hold all the frames
+    var frameContent = $('<div class="sbframe-content"></div>');
+    frameContent.addClass('dashboard-row-orientation');
+    frameContent.append(frames.detach());
+
+    // row orientation to stack nav and frame content
+    page.addClass('dashboard-row-orientation');
+    page.append(nav);
+    page.append(frameContent);
+    setFlex(frameContent, 1);
+
+    // initialize sly
+    var sly = new Sly(frameList, {
+    		horizontal: true,
+    		itemNav: 'basic',
+    		smart: true,
+    		activateOn: 'click',
+    		startAt: 0,
+    		scrollBy: 1,
+    		activatePageOn: 'click',
+    		speed: 200,
+    		moveBy: 600,
+    		dragHandle: true,
+    		dynamicHandle: true,
+    		clickBar: true,
+    		keyboardNavBy: 'items',
+    		next: next,
+    		prev: prev
+    	}).init();
+
+    // make first frame active
+    frames.removeClass('active');
+    frames.first().addClass('active');
+
+    // subscribe to frame changed events
+    sly.on('active', function (eventName, itemIndex) {
+      frames.removeClass('active');
+      frames.eq(itemIndex).addClass('active')
+                          .trigger('shown');
+    });
+  }
+
+  function layoutPageByRows(page, fillPage) {
+
+    // row orientation
+    page.addClass('dashboard-row-orientation');
+
+    // find all the level2 sections (those are the rows)
+    var rows = page.find('div.section.level2');
+
+    // if there are no level2 sections then treat the
+    // entire page as if it's a level 2 section
+    if (rows.length === 0) {
+      page.wrapInner('<div class="section level2"></div>');
+      rows = page.find('div.section.level2');
+    }
+
+    rows.each(function () {
+
+      // flags
+      var haveNotes = false;
+      var haveFlexHeight = true;
+
+      // remove the h2
+      $(this).children('h2').remove();
+
+      // check for a tabset
+      var isTabset = $(this).hasClass('tabset');
+      if (isTabset)
+        layoutTabset($(this));
+
+      // give it row layout semantics if it's not a tabset
+      if (!isTabset)
+        $(this).addClass('dashboard-row');
+
+      // find all of the level 3 subheads
+      var columns = $(this).find('div.section.level3');
+
+      // determine figureSizes sizes
+      var figureSizes = chartFigureSizes(columns);
+
+      // fixup the columns
+      columns.each(function(index) {
+
+        // layout the chart (force flex if we are in a tabset)
+        var result = layoutChart($(this), isTabset);
+
+        // update flexHeight state
+        if (!result.flex)
+          haveFlexHeight = false;
+
+        // update state
+        if (result.notes)
+          haveNotes = true;
+
+        // set the column flex based on the figure width
+        // (value boxes will just get the default figure width)
+        var chartWidth = figureSizes[index].width;
+        setFlex($(this), chartWidth + ' ' + chartWidth + ' 0px');
+
+      });
+
+      // remove empty chart note divs
+      if (isTabset)
+        $(this).find('.chart-notes').filter(function() {
+            return $(this).html() === "&nbsp;";
+        }).remove();
+      if (!haveNotes)
+        $(this).find('.chart-notes').remove();
+
+       // make it a flexbox row
+      if (haveFlexHeight)
+        $(this).addClass('dashboard-row-flex');
+
+      // now we can set the height on all the wrappers (based on maximum
+      // figure height + room for title and notes, or data-height on the
+      // container if specified). However, don't do this if there is
+      // no flex on any of the constituent columns
+      var flexHeight = null;
+      var dataHeight = parseInt($(this).attr('data-height'));
+      if (dataHeight)
+        flexHeight = adjustedHeight(dataHeight, columns.first());
+      else if (haveFlexHeight)
+        flexHeight = maxChartHeight(figureSizes, columns);
+      if (flexHeight) {
+        if (fillPage)
+          setFlex($(this), flexHeight + ' ' + flexHeight + ' 0px');
+        else {
+          $(this).css('height', flexHeight + 'px');
+          setFlex($(this), '0 0 ' + flexHeight + 'px');
+        }
+      }
+
+    });
+  }
+
+  function layoutPageByColumns(page, fillPage) {
+
+    // column orientation
+    page.addClass('dashboard-column-orientation');
+
+    // find all the level2 sections (those are the columns)
+    var columns = page.find('div.section.level2');
+
+    // if there are no level2 sections then treat the
+    // entire page as if it's a level 2 section
+    if (columns.length === 0) {
+      page.wrapInner('<div class="section level2"></div>');
+      columns = page.find('div.section.level2');
+    }
+
+    // layout each column
+    columns.each(function (index) {
+
+      // remove the h2
+      $(this).children('h2').remove();
+
+      // make it a flexbox column
+      $(this).addClass('dashboard-column');
+
+      // check for a tabset
+      var isTabset = $(this).hasClass('tabset');
+      if (isTabset)
+        layoutTabset($(this));
+
+      // find all the h3 elements
+      var rows = $(this).find('div.section.level3');
+
+      // get the figure sizes for the rows
+      var figureSizes = chartFigureSizes(rows);
+
+      // column flex is the max row width (or data-width if specified)
+      var flexWidth;
+      var dataWidth = parseInt($(this).attr('data-width'));
+      if (dataWidth)
+        flexWidth = dataWidth;
+      else
+        flexWidth = maxChartWidth(figureSizes);
+      setFlex($(this), flexWidth + ' ' + flexWidth + ' 0px');
+
+      // layout each chart
+      rows.each(function(index) {
+
+        // perform the layout
+        var result = layoutChart($(this), false);
+
+        // ice the notes if there are none
+        if (!result.notes)
+          $(this).find('.chart-notes').remove();
+
+        // set flex height based on figHeight, then adjust
+        if (result.flex) {
+          var chartHeight = figureSizes[index].height;
+          chartHeight = adjustedHeight(chartHeight, $(this));
+          if (fillPage)
+            setFlex($(this), chartHeight + ' ' + chartHeight + ' 0px');
+          else {
+            $(this).css('height', chartHeight + 'px');
+            setFlex($(this), chartHeight + ' ' + chartHeight + ' ' + chartHeight + 'px');
+          }
+        }
+      });
+    });
+  }
+
+  function chartFigureSizes(charts) {
+
+    // sizes
+    var figureSizes = new Array(charts.length);
+
+    // check each chart
+    charts.each(function(index) {
+
+      // start with default
+      figureSizes[index] = {
+        width: _options.defaultFigWidth,
+        height: _options.defaultFigHeight
+      };
+
+      // look for data-height or data-width then knit options
+      var dataWidth = parseInt($(this).attr('data-width'));
+      var dataHeight = parseInt($(this).attr('data-height'));
+      var knitrOptions = $(this).find('.knitr-options:first');
+      var knitrWidth, knitrHeight;
+      if (knitrOptions) {
+        knitrWidth = parseInt(knitrOptions.attr('data-fig-width'));
+        knitrHeight =  parseInt(knitrOptions.attr('data-fig-height'));
+      }
+
+      // width
+      if (dataWidth)
+        figureSizes[index].width = dataWidth;
+      else if (knitrWidth)
+        figureSizes[index].width = knitrWidth;
+
+      // height
+      if (dataHeight)
+        figureSizes[index].height = dataHeight;
+      else if (knitrHeight)
+        figureSizes[index].height = knitrHeight;
+    });
+
+    // return sizes
+    return figureSizes;
+  }
+
+  function maxChartHeight(figureSizes, charts) {
+
+    // first compute the maximum height
+    var maxHeight = _options.defaultFigHeight;
+    for (var i = 0; i<figureSizes.length; i++)
+      if (figureSizes[i].height > maxHeight)
+        maxHeight = figureSizes[i].height;
+
+    // now add offests for chart title and chart notes
+    if (charts.length)
+      maxHeight = adjustedHeight(maxHeight, charts.first());
+
+    return maxHeight;
+  }
+
+  function adjustedHeight(height, chart) {
+    if (chart.length > 0) {
+      var chartTitle = chart.find('.chart-title');
+      if (chartTitle.length)
+        height += chartTitle.first().outerHeight();
+      var chartNotes = chart.find('.chart-notes');
+      if (chartNotes.length)
+        height += chartNotes.first().outerHeight();
+    }
+    return height;
+  }
+
+  function maxChartWidth(figureSizes) {
+    var maxWidth = _options.defaultFigWidth;
+    for (var i = 0; i<figureSizes.length; i++)
+      if (figureSizes[i].width > maxWidth)
+        maxWidth = figureSizes[i].width;
+    return maxWidth;
+  }
+
+  // layout a chart
+  function layoutChart(chart, forceFlex) {
+
+    // state to return
+    var result = {
+      notes: false,
+      flex: false
+    };
+
+    // extract the title
+    var title = extractTitle(chart);
+
+    // find components that apply to this container
+    var components = componentsFind(chart);
+
+    // if it's a custom component then call it and return
+    var customComponents = componentsCustom(components);
+    if (customComponents.length) {
+      componentsLayout(customComponents, title, chart);
+      result.notes = false;
+      result.flex = forceFlex || componentsFlex(customComponents);
+      return result;
+    }
+
+    // put all the content in a chart wrapper div
+    chart.addClass('chart-wrapper');
+    chart.wrapInner('<div class="chart-stage"></div>');
+    var chartContent = chart.children('.chart-stage');
+
+    // flex the content if appropriate
+    result.flex = forceFlex || componentsFlex(components);
+    if (result.flex) {
+      // add flex classes
+      chart.addClass('chart-wrapper-flex');
+      chartContent.addClass('chart-stage-flex');
+
+      // additional shim to break out of flexbox sizing
+      chartContent.wrapInner('<div class="chart-shim"></div>');
+      chartContent = chartContent.children('.chart-shim');
+    }
+
+    // set custom data-padding attribute
+    var pad = chart.attr('data-padding');
+    if (pad) {
+      if (pad === "0")
+        chart.addClass('no-padding');
+      else {
+        pad = pad + 'px';
+        chartContent.css('left', pad)
+                    .css('top', pad)
+                    .css('right', pad)
+                    .css('bottom', pad)
+      }
+    }
+
+    // call compoents
+    componentsLayout(components, title, chartContent);
+
+    // also activate components on shiny output
+    findShinyOutput(chartContent).on('shiny:value',
+      function(event) {
+        var element = $(event.target);
+        setTimeout(function() {
+
+          // see if we opted out of flex based on our output (for shiny
+          // we can't tell what type of output we have until after the
+          // value is bound)
+          var components = componentsFind(element);
+          var flex = forceFlex || componentsFlex(components);
+          if (!flex) {
+            chart.css('height', "");
+            setFlex(chart, "");
+            chart.removeClass('chart-wrapper-flex');
+            chartContent.removeClass('chart-stage-flex');
+            chartContent.children().unwrap();
+          }
+
+          // perform layout
+          componentsLayout(components, title, element.parent());
+        }, 10);
+      });
+
+    // add the title
+    var chartTitle = $('<div class="chart-title"></div>');
+    chartTitle.append(title);
+    chart.prepend(chartTitle);
+
+    // add the notes section
+    var chartNotes = $('<div class="chart-notes"></div>');
+    chartNotes.html('&nbsp;');
+    chart.append(chartNotes);
+
+    // attempt to extract notes if we have a component
+    if (components.length)
+      result.notes = extractChartNotes(chartContent, chartNotes);
+
+    // return result
+    return result;
+  }
+
+  // build a tabset from a section div with the .tabset class
+  function layoutTabset(tabset) {
+
+    // check for fade option
+    var fade = tabset.hasClass("tabset-fade");
+    var pills = tabset.hasClass("tabset-pills");
+    var navClass = pills ? "nav-pills" : "nav-tabs";
+
+    // determine the heading level of the tabset and tabs
+    var match = tabset.attr('class').match(/level(\d) /);
+    if (match === null)
+      return;
+    var tabsetLevel = Number(match[1]);
+    var tabLevel = tabsetLevel + 1;
+
+    // find all subheadings immediately below
+    var tabs = tabset.find("div.section.level" + tabLevel);
+    if (!tabs.length)
+      return;
+
+    // create tablist and tab-content elements
+    var tabList = $('<ul class="nav ' + navClass + '" role="tablist"></ul>');
+    $(tabs[0]).before(tabList);
+    var tabContent = $('<div class="tab-content"></div>');
+    $(tabs[0]).before(tabContent);
+
+    // build the tabset
+    var activeTab = 0;
+    tabs.each(function(i) {
+
+      // get the tab div
+      var tab = $(tabs[i]);
+
+      // get the id then sanitize it for use with bootstrap tabs
+      var id = tab.attr('id');
+
+      // see if this is marked as the active tab
+      if (tab.hasClass('active'))
+        activeTab = i;
+
+      // sanitize the id for use with bootstrap tabs
+      id = id.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_');
+      tab.attr('id', id);
+
+      // get the heading element within it and grab it's text
+      var heading = tab.find('h' + tabLevel + ':first');
+      var headingDom = heading.contents();
+
+      // build and append the tab list item
+      var a = $('<a role="tab" data-toggle="tab" data-bs-toggle="tab" class="nav-link"></a>');
+      a.append(headingDom);
+      a.attr('href', '#' + id);
+      a.attr('aria-controls', id);
+      var li = $('<li role="presentation" class="nav-item"></li>');
+      li.append(a);
+      tabList.append(li);
+
+      // set it's attributes
+      tab.attr('role', 'tabpanel');
+      tab.addClass('tab-pane');
+      tab.addClass('tabbed-pane');
+      tab.addClass('no-title');
+      if (fade)
+        tab.addClass('fade');
+
+      // move it into the tab content div
+      tab.detach().appendTo(tabContent);
+    });
+
+    // set active tab
+    $(tabList.children()[activeTab]).tab("show");
+    var active = $(tabContent.children('div.section')[activeTab]);
+    active.addClass('active');
+    if (fade)
+      active.addClass('in');
+
+    // add nav-tabs-custom
+    tabset.addClass('nav-tabs-custom');
+
+    // internal layout is dashboard-column with tab-content flexing
+    tabset.addClass('dashboard-column');
+    setFlex(tabContent, 1);
+  }
+
+  // one time global initialization for components
+  function componentsInit(dashboardContainer) {
+    for (var i=0; i<window.FlexDashboardComponents.length; i++) {
+      var component = window.FlexDashboardComponents[i];
+      if (component.init)
+        component.init(dashboardContainer);
+    }
+  }
+
+  // find components that apply within a container
+  function componentsFind(container) {
+
+    // look for components
+    var components = [];
+    for (var i=0; i<window.FlexDashboardComponents.length; i++) {
+      var component = window.FlexDashboardComponents[i];
+      if (component.find(container).length)
+        components.push(component);
+    }
+
+    // if there were none then use a special flowing content component
+    // that just adds a scrollbar in fillPage mode
+    if (components.length == 0) {
+      components.push({
+        find: function(container) {
+          return container;
+        },
+
+        flex: function(fillPage) {
+          return fillPage;
+        },
+
+        layout: function(title, container, element, fillPage) {
+          if (fillPage) {
+            container.addClass('flowing-content-shim');
+            container.addClass('flowing-content-container');
+          }
+        }
+      });
+    }
+
+    return components;
+  }
+
+  // if there is a custom component then pick it out
+  function componentsCustom(components) {
+    var customComponent = [];
+    for (var i=0; i<components.length; i++)
+      if (components[i].type === "custom") {
+        customComponent.push(components[i]);
+        break;
+      }
+    return customComponent;
+  }
+
+  // query all components for flex
+  function componentsFlex(components) {
+
+    // no components at all means no flex
+    if (components.length === 0)
+      return false;
+
+    // otherwise query components (assume true unless we see false)
+    var isMobile = isMobilePhone();
+    for (var i=0; i<components.length; i++)
+      if (components[i].flex && !components[i].flex(_options.fillPage))
+        return false;
+    return true;
+  }
+
+  // layout all components
+  function componentsLayout(components, title, container) {
+    var isMobile = isMobilePhone();
+    for (var i=0; i<components.length; i++) {
+      var element = components[i].find(container);
+      if (components[i].layout) {
+        // call layout (don't call other components if it returns false)
+        var result = components[i].layout(title, container, element, _options.fillPage);
+        if (result === false)
+          return;
+      }
+    }
+  }
+
+  // get a reference to the h3, discover it's inner html, and remove it
+  function extractTitle(container) {
+    var h3 = container.children('h3').first();
+    var title = '';
+    if (!container.hasClass('no-title'))
+      title = h3.contents();
+    h3.detach();
+    return title;
+  }
+
+  // extract chart notes
+  function extractChartNotes(chartContent, chartNotes) {
+    // look for a terminating blockquote or image caption
+    var blockquote = chartContent.children('blockquote:last-child');
+    var caption = chartContent.children('div.image-container')
+                              .children('p.caption');
+    if (blockquote.length) {
+      chartNotes.empty().append(blockquote.children('p:first-child').contents());
+      blockquote.remove();
+      return true;
+    } else if (caption.length) {
+      chartNotes.empty().append(caption.contents());
+      caption.remove();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function findShinyOutput(chartContent) {
+    return chartContent.find('.shiny-text-output, .shiny-html-output');
+  }
+
+  // safely detect rendering on a mobile phone
+  function isMobilePhone() {
+    try
+    {
+      return ! window.matchMedia("only screen and (min-width: 768px)").matches;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
+  function isFillPage() {
+    return _options.fillPage;
+  }
+
+  // detect portrait mode
+  function isPortrait() {
+    return ($(window).width() < $(window).height());
+  }
+
+  // safely detect rendering on a tablet
+  function isTablet() {
+    try
+    {
+      return window.matchMedia("only screen and (min-width: 769px) and (max-width: 992px)").matches;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
+  // test whether this is a shiny doc
+  function isShinyDoc() {
+    return (typeof(window.Shiny) !== "undefined" && !!window.Shiny.outputBindings);
+  }
+
+  // set flex using vendor specific prefixes
+  function setFlex(el, flex) {
+    el.css('-webkit-box-flex', flex)
+      .css('-webkit-flex', flex)
+      .css('-ms-flex', flex)
+      .css('flex', flex);
+  }
+
+  // support bookmarking of pages
+  function handleLocationHash() {
+
+    // restore tab/page from bookmark
+    var hash = window.decodeURIComponent(window.location.hash);
+    if (hash.length > 0) {
+      // Update the tab without .showPage() so that we don't change page history
+      $('ul.nav a[href="' + hash + '"]').tab('show');
+    }
+
+    // navigate to a tab when the history changes
+    window.addEventListener("popstate", function(e) {
+      var hash = window.decodeURIComponent(window.location.hash);
+      var activeTab = $('ul.nav a[href="' + hash + '"]');
+      if (activeTab.length) {
+        activeTab.tab('show');
+      } else {
+        // returning to the base page URL without a hash activates first tab
+        $('ul.nav a:first').tab('show');
+      }
+    });
+
+    // add a hash to the URL when the user clicks on a tab/page
+    $('.navbar-nav a[data-toggle="tab"]').on('click', function(e) {
+      var baseUrl = FlexDashboardUtils.urlWithoutHash(window.location.href);
+      var hash = FlexDashboardUtils.urlHash($(this).attr('href'));
+      var href = baseUrl + hash;
+      FlexDashboardUtils.setLocation(href);
+    });
+
+    // handle clicks of other links that should activate pages
+    var navPages = $('ul.navbar-nav li a[data-toggle=tab]');
+    navPages.each(function() {
+      var href =  $(this).attr('href');
+      var links = $('a[href="' + href + '"][data-toggle!=tab]');
+      links.each(function() {
+        $(this).on('click', function(e) {
+          window.FlexDashboardUtils.showPage(href);
+        });
+      });
+    });
+  }
+
+  // tweak Prism highlighting
+  function initPrismHighlighting() {
+
+    if (window.Prism) {
+      Prism.languages.insertBefore('r', 'comment', {
+        'heading': [
+          {
+            // title 1
+        	  // =======
+
+        	  // title 2
+        	  // -------
+        	  pattern: /\w+.*(?:\r?\n|\r)(?:====+|----+)/,
+            alias: 'operator'
+          },
+          {
+            // ### title 3
+            pattern: /(^\s*)###[^#].+/m,
+            lookbehind: true,
+            alias: 'operator'
+          }
+        ]
+      });
+
+      // prism highlight
+      Prism.highlightAll();
+    }
+  }
+
+  FlexDashboard.prototype = {
+    constructor: FlexDashboard,
+    init: init,
+    isMobilePhone: isMobilePhone,
+    isFillPage: isFillPage
+  };
+
+  return FlexDashboard;
+
+})();
+
+// utils
+window.FlexDashboardUtils = {
+  resizableImage: function(img) {
+    var src = img.attr('src');
+    var url = 'url("' + src + '")';
+    img.parent().css('background', url)
+                .css('background-size', 'contain')
+                .css('background-repeat', 'no-repeat')
+                .css('background-position', 'center')
+                .addClass('image-container');
+  },
+  setLocation: function(href) {
+    if (history && history.pushState) {
+      history.pushState(null, null, href);
+    } else {
+      window.location.replace(href);
+    }
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+    }, 10);
+  },
+  showPage: function(href) {
+    $('ul.navbar-nav li a[href="' + href + '"]').tab('show');
+    var baseUrl = this.urlWithoutHash(window.location.href);
+    var loc = baseUrl + href;
+    this.setLocation(loc);
+  },
+  showLinkedValue: function(href) {
+    // check for a page link
+    if ($('ul.navbar-nav li a[data-toggle=tab][href="' + href + '"]').length > 0)
+      this.showPage(href);
+    else
+      window.open(href);
+  },
+  urlWithoutHash: function(url) {
+    var hashLoc = url.indexOf('#');
+    if (hashLoc != -1)
+      return url.substring(0, hashLoc);
+    else
+      return url;
+  },
+  urlHash: function(url) {
+    var hashLoc = url.indexOf('#');
+    if (hashLoc != -1)
+      return url.substring(hashLoc);
+    else
+      return "";
+  }
+};
+
+window.FlexDashboard = new FlexDashboard();
+
+// empty content
+window.FlexDashboardComponents.push({
+  find: function(container) {
+    if (container.find('p').length == 0)
+      return container;
+    else
+      return $();
+  }
+})
+
+// plot image
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('p')
+                    .children('img:only-child');
+  },
+
+  layout: function(title, container, element, fillPage) {
+    FlexDashboardUtils.resizableImage(element);
+  }
+});
+
+// plot image (figure style)
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('div.figure').children('img');
+  },
+
+  layout: function(title, container, element, fillPage) {
+    FlexDashboardUtils.resizableImage(element);
+  }
+});
+
+// htmlwidget
+window.FlexDashboardComponents.push({
+
+  init: function(dashboardContainer) {
+    // trigger "shown" after initial layout to force static htmlwidgets
+    // in runtime: shiny to be resized after the dom has been transformed
+    dashboardContainer.on('flexdashboard:layoutcomplete', function(event) {
+      setTimeout(function() {
+        dashboardContainer.trigger('shown');
+      }, 200);
+    });
+  },
+
+  find: function(container) {
+    return container.children('div[id^="htmlwidget-"],div.html-widget');
+  }
+});
+
+// gauge
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('div.html-widget.gauge');
+  },
+
+  flex: function(fillPage) {
+    return false;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+
+  }
+
+});
+
+// shiny output
+window.FlexDashboardComponents.push({
+  find: function(container) {
+    return container.children('div[class^="shiny-"]');
+  }
+});
+
+// bootstrap table
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    var bsTable = container.find('table.table');
+    if (bsTable.length !== 0)
+      return bsTable;
+    else
+      return container.find('tr.header').parent('thead').parent('table');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+    // alias variables
+    var bsTable = element;
+
+    // fixup xtable generated tables with a proper thead
+    var headerRow = bsTable.find('tbody > tr:first-child > th').parent();
+    if (headerRow.length > 0) {
+      var thead = $('<thead></thead>');
+      bsTable.prepend(thead);
+      headerRow.detach().appendTo(thead);
+    }
+
+    // improve appearance
+    container.addClass('bootstrap-table');
+
+    // for fill page provide scrolling w/ sticky headers
+    if (fillPage) {
+      // force scrollbar on overflow
+      container.addClass('flowing-content-shim');
+
+      // stable table headers when scrolling
+      bsTable.stickyTableHeaders({
+        scrollableArea: container
+      });
+    }
+  }
+});
+
+// embedded shiny app
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.find('iframe.shiny-frame');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+    if (fillPage) {
+      element.attr('height', '100%');
+    } else {
+      // provide default height if necessary
+      var height = element.get(0).style.height;
+      if (!height)
+        height = element.attr('height');
+      if (!height)
+        element.attr('height', 500);
+    }
+  }
+});
+
+// shiny fillRow or fillCol
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.find('.flexfill-container');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+    if (fillPage)
+      element.css('height', '100%');
+    else {
+      // provide default height if necessary
+      var height = element.get(0).style.height;
+      if (height === "100%" || height === "auto" || height === "initial" ||
+          height === "inherit" || !height) {
+        element.css('height', 500);
+      }
+    }
+  }
+});
+
+// valueBox
+window.FlexDashboardComponents.push({
+
+  type: "custom",
+
+  find: function(container) {
+    if (container.find('span.value-output, .shiny-valuebox-output').length)
+      return container;
+    else
+      return $();
+  },
+
+  flex: function(fillPage) {
+    return false;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+    // alias variables
+    var chartTitle = title;
+    var valueBox = element;
+
+    // add value-box class to container
+    container.addClass('value-box');
+
+    // value paragraph
+    var value = $('<p class="value"></p>');
+
+    // if we have shiny-text-output then just move it in
+    var valueOutputSpan = [];
+    var shinyOutput = valueBox.find('.shiny-valuebox-output').detach();
+    if (shinyOutput.length) {
+      valueBox.children().remove();
+      shinyOutput.html("&mdash;");
+      value.append(shinyOutput);
+    } else {
+      // extract the value (remove leading vector index)
+      var chartValue = valueBox.text().trim();
+      chartValue = chartValue.replace("[1] ", "");
+      valueOutputSpan = valueBox.find('span.value-output').detach();
+      valueBox.children().remove();
+      value.text(chartValue);
+    }
+
+    // caption
+    var caption = $('<p class="caption"></p>');
+    caption.append(chartTitle);
+
+    // build inner div for value box and add it
+    var inner = $('<div class="inner"></div>');
+    inner.append(value);
+    inner.append(caption);
+    valueBox.append(inner);
+
+    // add icon if specified
+    var icon = $('<div class="icon"><i></i></div>');
+    valueBox.append(icon);
+    function setIcon(chartIcon) {
+      var iconLib = "";
+      var iconSplit = chartIcon.split(" ");
+      if (iconSplit.length > 1) {
+        iconLib = iconSplit[0];
+        chartIcon = iconSplit.slice(1).join(" ");
+      } else {
+        var components = chartIcon.split("-");
+        if (components.length > 1)
+          iconLib = components[0];
+      }
+      icon.children('i').attr('class', iconLib + ' ' + chartIcon);
+    }
+    var chartIcon = valueBox.attr('data-icon');
+    if (chartIcon)
+      setIcon(chartIcon);
+
+    // handle data attributes in valueOutputSpan
+    function handleValueOutput(valueOutput) {
+
+      // caption
+      var dataCaption = valueOutput.attr('data-caption');
+      if (dataCaption)
+        caption.html(dataCaption);
+
+      // icon
+      var dataIcon = valueOutput.attr('data-icon');
+      if (dataIcon)
+        setIcon(dataIcon);
+
+      // If valueBox(color=) was an accent color, this attr should
+      // be populated with the accent color and the relevant CSS comes
+      // in through HTML dependencies
+      var dataColorAccent = valueOutput.attr('data-color-accent');
+      var valueBoxClasses = "value-box-" + (["primary", "info", "danger", "warning", "success"].join(" value-box-"));
+      if (dataColorAccent) {
+        valueBox.removeClass(valueBoxClasses);
+        valueBox.addClass('value-box-' + dataColorAccent);
+      }
+
+      // If valueBox(color=) was a CSS color, these other data-color-*
+      // attrs will be populated
+      var dataColor = valueOutput.attr('data-color');
+      if (dataColor) {
+        valueBox.removeClass(valueBoxClasses);
+        valueBox.css('background-color', dataColor);
+      }
+      var dataColorText = valueOutput.attr('data-color-text');
+      if (dataColorText) {
+        valueBox.find(".inner").css('color', dataColorText);
+      }
+      var dataColorIcon = valueOutput.attr('data-color-icon');
+      if (dataColorIcon) {
+        valueBox.find(".icon").css('color', dataColorIcon);
+      }
+
+      // url
+      var dataHref = valueOutput.attr('data-href');
+      if (dataHref) {
+        valueBox.addClass('linked-value');
+        valueBox.off('click.value-box');
+        valueBox.on('click.value-box', function(e) {
+          window.FlexDashboardUtils.showLinkedValue(dataHref);
+        });
+      }
+    }
+
+    // check for a valueOutputSpan
+    if (valueOutputSpan.length > 0) {
+      handleValueOutput(valueOutputSpan);
+    }
+
+    // if we have a shinyOutput then bind a listener to handle
+    // new valueOutputSpan values
+    shinyOutput.on('shiny:value',
+      function(event) {
+        var element = $(event.target);
+        setTimeout(function() {
+          var valueOutputSpan = element.find('span.value-output');
+          if (valueOutputSpan.length > 0)
+            handleValueOutput(valueOutputSpan);
+        }, 10);
+      }
+    );
+  }
+});
+</script>
+
+<div id="dashboard-container">
 
 <div id="column" class="section level2" data-width="650">
 <h2>Column</h2>
 <div id="chart-a" class="section level3">
 <h3>Chart A</h3>
-<pre class="r"><code>cleaned_data %&gt;% 
-  count(aisle, department) %&gt;% 
-  mutate(aisle = fct_reorder(aisle, n)) %&gt;% 
-  plot_ly(x = ~aisle, y = ~n, color = ~department, type = &quot;bar&quot;, colors = &quot;viridis&quot;)</code></pre>
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-fcf0f2ae0c9f8e6feab8" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-fcf0f2ae0c9f8e6feab8">{"x":{"visdat":{"90ec3e2b88c2":["function () ","plotlyVisDat"]},"cur_data":"90ec3e2b88c2","attrs":{"90ec3e2b88c2":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"aisle","type":"category","categoryorder":"array","categoryarray":["diapers wipes","facial care","feminine care","hair care","ice cream toppings","indian foods","kosher foods","packaged seafood","specialty wines champagnes","white wines","baby accessories","beauty","first aid","mint gum","packaged meat","protein meal replacements","spirits","digestion","fresh pasta","refrigerated pudding desserts","shave needs","skin care","air fresheners candles","beers coolers","bulk dried fruits vegetables","cold flu allergy","deodorants","muscles joints pain relief","plates bowls cups flatware","trail mix snack mix","trash bags liners","bakery desserts","dog food care","energy sports drinks","honeys syrups nectars","body lotions soap","canned meat seafood","food storage","frozen breads doughs","frozen meat seafood","frozen pizza","vitamins supplements","breakfast bars pastries","fruit vegetable snacks","meat counter","oral hygiene","prepared meals","cleaning products","latino foods","missing","other","soap","specialty cheeses","cat food care","doughs gelatins bake mixes","frozen vegan vegetarian","marinades meat preparation","pickled goods olives","poultry counter","prepared soups salads","hot cereal pancake mixes","laundry","salad dressing toppings","canned fruit applesauce","coffee","buns rolls","dish detergents","granola","grains rice dried goods","oils vinegars","condiments","popcorn jerky","preserved dips spreads","cocoa drink mixes","tea","asian foods","packaged poultry","frozen appetizers sides","breakfast bakery","canned jarred vegetables","pasta sauce","spices seasonings","cookies cakes","frozen breakfast","juice nectars","instant foods","tortillas flat bread","butter","nuts seeds dried fruit","paper goods","candy chocolate","canned meals beans","dry pasta","other creams cheeses","tofu meat alternatives","baking ingredients","packaged produce","soft drinks","fresh herbs","hot dogs bacon sausage","baby food formula","cream","spreads","soup broth bouillon","frozen meals","lunch meat","fresh dips tapenades","energy granola bars","crackers","refrigerated","frozen produce","cereal","eggs","ice cream ice","bread","chips pretzels","soy lactosefree","milk","water seltzer sparkling water","packaged cheese","yogurt","packaged vegetables fruits","fresh vegetables","fresh fruits"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"n"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["beers coolers","specialty wines champagnes","spirits","white wines"],"y":[4,1,2,1],"type":"bar","name":"alcohol","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["baby accessories","baby food formula","diapers wipes"],"y":[2,34,1],"type":"bar","name":"babies","marker":{"color":"rgba(72,20,102,1)","line":{"color":"rgba(72,20,102,1)"}},"textfont":{"color":"rgba(72,20,102,1)"},"error_y":{"color":"rgba(72,20,102,1)"},"error_x":{"color":"rgba(72,20,102,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["bakery desserts","bread","breakfast bakery","buns rolls","tortillas flat bread"],"y":[5,60,23,14,27],"type":"bar","name":"bakery","marker":{"color":"rgba(72,37,117,1)","line":{"color":"rgba(72,37,117,1)"}},"textfont":{"color":"rgba(72,37,117,1)"},"error_y":{"color":"rgba(72,37,117,1)"},"error_x":{"color":"rgba(72,37,117,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["cocoa drink mixes","coffee","energy sports drinks","juice nectars","refrigerated","soft drinks","tea","water seltzer sparkling water"],"y":[19,13,6,25,52,31,20,87],"type":"bar","name":"beverages","marker":{"color":"rgba(70,52,128,1)","line":{"color":"rgba(70,52,128,1)"}},"textfont":{"color":"rgba(70,52,128,1)"},"error_y":{"color":"rgba(70,52,128,1)"},"error_x":{"color":"rgba(70,52,128,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["breakfast bars pastries","cereal","granola","hot cereal pancake mixes"],"y":[8,55,15,11],"type":"bar","name":"breakfast","marker":{"color":"rgba(65,68,135,1)","line":{"color":"rgba(65,68,135,1)"}},"textfont":{"color":"rgba(65,68,135,1)"},"error_y":{"color":"rgba(65,68,135,1)"},"error_x":{"color":"rgba(65,68,135,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["bulk dried fruits vegetables"],"y":[4],"type":"bar","name":"bulk","marker":{"color":"rgba(59,82,139,1)","line":{"color":"rgba(59,82,139,1)"}},"textfont":{"color":"rgba(59,82,139,1)"},"error_y":{"color":"rgba(59,82,139,1)"},"error_x":{"color":"rgba(59,82,139,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["canned fruit applesauce","canned jarred vegetables","canned meals beans","canned meat seafood","soup broth bouillon"],"y":[13,24,29,7,38],"type":"bar","name":"canned goods","marker":{"color":"rgba(53,96,141,1)","line":{"color":"rgba(53,96,141,1)"}},"textfont":{"color":"rgba(53,96,141,1)"},"error_y":{"color":"rgba(53,96,141,1)"},"error_x":{"color":"rgba(53,96,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["butter","cream","eggs","milk","other creams cheeses","packaged cheese","refrigerated pudding desserts","soy lactosefree","specialty cheeses","yogurt"],"y":[28,35,57,82,29,106,3,64,9,158],"type":"bar","name":"dairy eggs","marker":{"color":"rgba(47,108,142,1)","line":{"color":"rgba(47,108,142,1)"}},"textfont":{"color":"rgba(47,108,142,1)"},"error_y":{"color":"rgba(47,108,142,1)"},"error_x":{"color":"rgba(47,108,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["fresh dips tapenades","lunch meat","prepared meals","prepared soups salads","tofu meat alternatives"],"y":[43,42,8,10,29],"type":"bar","name":"deli","marker":{"color":"rgba(42,120,142,1)","line":{"color":"rgba(42,120,142,1)"}},"textfont":{"color":"rgba(42,120,142,1)"},"error_y":{"color":"rgba(42,120,142,1)"},"error_x":{"color":"rgba(42,120,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["dry pasta","fresh pasta","grains rice dried goods","instant foods","pasta sauce"],"y":[29,3,16,27,24],"type":"bar","name":"dry goods pasta","marker":{"color":"rgba(37,132,142,1)","line":{"color":"rgba(37,132,142,1)"}},"textfont":{"color":"rgba(37,132,142,1)"},"error_y":{"color":"rgba(37,132,142,1)"},"error_x":{"color":"rgba(37,132,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["frozen appetizers sides","frozen breads doughs","frozen breakfast","frozen meals","frozen meat seafood","frozen pizza","frozen produce","frozen vegan vegetarian","ice cream ice"],"y":[22,7,25,41,7,7,53,10,58],"type":"bar","name":"frozen","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["air fresheners candles","cleaning products","dish detergents","food storage","laundry","paper goods","plates bowls cups flatware","trash bags liners"],"y":[4,9,15,7,11,28,4,4],"type":"bar","name":"household","marker":{"color":"rgba(30,156,137,1)","line":{"color":"rgba(30,156,137,1)"}},"textfont":{"color":"rgba(30,156,137,1)"},"error_y":{"color":"rgba(30,156,137,1)"},"error_x":{"color":"rgba(30,156,137,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["asian foods","indian foods","kosher foods","latino foods"],"y":[21,1,1,9],"type":"bar","name":"international","marker":{"color":"rgba(34,168,132,1)","line":{"color":"rgba(34,168,132,1)"}},"textfont":{"color":"rgba(34,168,132,1)"},"error_y":{"color":"rgba(34,168,132,1)"},"error_x":{"color":"rgba(34,168,132,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["hot dogs bacon sausage","meat counter","packaged meat","packaged poultry","packaged seafood","poultry counter"],"y":[33,8,2,21,1,10],"type":"bar","name":"meat seafood","marker":{"color":"rgba(47,180,124,1)","line":{"color":"rgba(47,180,124,1)"}},"textfont":{"color":"rgba(47,180,124,1)"},"error_y":{"color":"rgba(47,180,124,1)"},"error_x":{"color":"rgba(47,180,124,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["missing"],"y":[9],"type":"bar","name":"missing","marker":{"color":"rgba(67,190,113,1)","line":{"color":"rgba(67,190,113,1)"}},"textfont":{"color":"rgba(67,190,113,1)"},"error_y":{"color":"rgba(67,190,113,1)"},"error_x":{"color":"rgba(67,190,113,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["other"],"y":[9],"type":"bar","name":"other","marker":{"color":"rgba(93,200,99,1)","line":{"color":"rgba(93,200,99,1)"}},"textfont":{"color":"rgba(93,200,99,1)"},"error_y":{"color":"rgba(93,200,99,1)"},"error_x":{"color":"rgba(93,200,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["baking ingredients","condiments","doughs gelatins bake mixes","honeys syrups nectars","marinades meat preparation","oils vinegars","pickled goods olives","preserved dips spreads","salad dressing toppings","spices seasonings","spreads"],"y":[31,18,10,6,10,16,10,18,11,24,37],"type":"bar","name":"pantry","marker":{"color":"rgba(122,209,81,1)","line":{"color":"rgba(122,209,81,1)"}},"textfont":{"color":"rgba(122,209,81,1)"},"error_y":{"color":"rgba(122,209,81,1)"},"error_x":{"color":"rgba(122,209,81,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["beauty","body lotions soap","cold flu allergy","deodorants","digestion","facial care","feminine care","first aid","hair care","muscles joints pain relief","oral hygiene","protein meal replacements","shave needs","skin care","soap","vitamins supplements"],"y":[2,7,4,4,3,1,1,2,1,4,8,2,3,3,9,7],"type":"bar","name":"personal care","marker":{"color":"rgba(154,217,61,1)","line":{"color":"rgba(154,217,61,1)"}},"textfont":{"color":"rgba(154,217,61,1)"},"error_y":{"color":"rgba(154,217,61,1)"},"error_x":{"color":"rgba(154,217,61,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["cat food care","dog food care"],"y":[10,5],"type":"bar","name":"pets","marker":{"color":"rgba(188,223,39,1)","line":{"color":"rgba(188,223,39,1)"}},"textfont":{"color":"rgba(188,223,39,1)"},"error_y":{"color":"rgba(188,223,39,1)"},"error_x":{"color":"rgba(188,223,39,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["fresh fruits","fresh herbs","fresh vegetables","packaged produce","packaged vegetables fruits"],"y":[364,33,361,31,186],"type":"bar","name":"produce","marker":{"color":"rgba(222,227,24,1)","line":{"color":"rgba(222,227,24,1)"}},"textfont":{"color":"rgba(222,227,24,1)"},"error_y":{"color":"rgba(222,227,24,1)"},"error_x":{"color":"rgba(222,227,24,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["candy chocolate","chips pretzels","cookies cakes","crackers","energy granola bars","fruit vegetable snacks","ice cream toppings","mint gum","nuts seeds dried fruit","popcorn jerky","trail mix snack mix"],"y":[29,64,25,51,44,8,1,2,28,18,4],"type":"bar","name":"snacks","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-27be4c3847eeeffe5426" style="width:576px;height:460.8px;"></div>
+<script type="application/json" data-for="htmlwidget-27be4c3847eeeffe5426">{"x":{"visdat":{"9c1262109ef1":["function () ","plotlyVisDat"]},"cur_data":"9c1262109ef1","attrs":{"9c1262109ef1":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"aisle","type":"category","categoryorder":"array","categoryarray":["diapers wipes","facial care","feminine care","hair care","ice cream toppings","indian foods","kosher foods","packaged seafood","specialty wines champagnes","white wines","baby accessories","beauty","first aid","mint gum","packaged meat","protein meal replacements","spirits","digestion","fresh pasta","refrigerated pudding desserts","shave needs","skin care","air fresheners candles","beers coolers","bulk dried fruits vegetables","cold flu allergy","deodorants","muscles joints pain relief","plates bowls cups flatware","trail mix snack mix","trash bags liners","bakery desserts","dog food care","energy sports drinks","honeys syrups nectars","body lotions soap","canned meat seafood","food storage","frozen breads doughs","frozen meat seafood","frozen pizza","vitamins supplements","breakfast bars pastries","fruit vegetable snacks","meat counter","oral hygiene","prepared meals","cleaning products","latino foods","missing","other","soap","specialty cheeses","cat food care","doughs gelatins bake mixes","frozen vegan vegetarian","marinades meat preparation","pickled goods olives","poultry counter","prepared soups salads","hot cereal pancake mixes","laundry","salad dressing toppings","canned fruit applesauce","coffee","buns rolls","dish detergents","granola","grains rice dried goods","oils vinegars","condiments","popcorn jerky","preserved dips spreads","cocoa drink mixes","tea","asian foods","packaged poultry","frozen appetizers sides","breakfast bakery","canned jarred vegetables","pasta sauce","spices seasonings","cookies cakes","frozen breakfast","juice nectars","instant foods","tortillas flat bread","butter","nuts seeds dried fruit","paper goods","candy chocolate","canned meals beans","dry pasta","other creams cheeses","tofu meat alternatives","baking ingredients","packaged produce","soft drinks","fresh herbs","hot dogs bacon sausage","baby food formula","cream","spreads","soup broth bouillon","frozen meals","lunch meat","fresh dips tapenades","energy granola bars","crackers","refrigerated","frozen produce","cereal","eggs","ice cream ice","bread","chips pretzels","soy lactosefree","milk","water seltzer sparkling water","packaged cheese","yogurt","packaged vegetables fruits","fresh vegetables","fresh fruits"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"n"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["beers coolers","specialty wines champagnes","spirits","white wines"],"y":[4,1,2,1],"type":"bar","name":"alcohol","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["baby accessories","baby food formula","diapers wipes"],"y":[2,34,1],"type":"bar","name":"babies","marker":{"color":"rgba(72,20,102,1)","line":{"color":"rgba(72,20,102,1)"}},"textfont":{"color":"rgba(72,20,102,1)"},"error_y":{"color":"rgba(72,20,102,1)"},"error_x":{"color":"rgba(72,20,102,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["bakery desserts","bread","breakfast bakery","buns rolls","tortillas flat bread"],"y":[5,60,23,14,27],"type":"bar","name":"bakery","marker":{"color":"rgba(72,37,117,1)","line":{"color":"rgba(72,37,117,1)"}},"textfont":{"color":"rgba(72,37,117,1)"},"error_y":{"color":"rgba(72,37,117,1)"},"error_x":{"color":"rgba(72,37,117,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["cocoa drink mixes","coffee","energy sports drinks","juice nectars","refrigerated","soft drinks","tea","water seltzer sparkling water"],"y":[19,13,6,25,52,31,20,87],"type":"bar","name":"beverages","marker":{"color":"rgba(70,52,128,1)","line":{"color":"rgba(70,52,128,1)"}},"textfont":{"color":"rgba(70,52,128,1)"},"error_y":{"color":"rgba(70,52,128,1)"},"error_x":{"color":"rgba(70,52,128,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["breakfast bars pastries","cereal","granola","hot cereal pancake mixes"],"y":[8,55,15,11],"type":"bar","name":"breakfast","marker":{"color":"rgba(65,68,135,1)","line":{"color":"rgba(65,68,135,1)"}},"textfont":{"color":"rgba(65,68,135,1)"},"error_y":{"color":"rgba(65,68,135,1)"},"error_x":{"color":"rgba(65,68,135,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["bulk dried fruits vegetables"],"y":[4],"type":"bar","name":"bulk","marker":{"color":"rgba(59,82,139,1)","line":{"color":"rgba(59,82,139,1)"}},"textfont":{"color":"rgba(59,82,139,1)"},"error_y":{"color":"rgba(59,82,139,1)"},"error_x":{"color":"rgba(59,82,139,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["canned fruit applesauce","canned jarred vegetables","canned meals beans","canned meat seafood","soup broth bouillon"],"y":[13,24,29,7,38],"type":"bar","name":"canned goods","marker":{"color":"rgba(53,96,141,1)","line":{"color":"rgba(53,96,141,1)"}},"textfont":{"color":"rgba(53,96,141,1)"},"error_y":{"color":"rgba(53,96,141,1)"},"error_x":{"color":"rgba(53,96,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["butter","cream","eggs","milk","other creams cheeses","packaged cheese","refrigerated pudding desserts","soy lactosefree","specialty cheeses","yogurt"],"y":[28,35,57,82,29,106,3,64,9,158],"type":"bar","name":"dairy eggs","marker":{"color":"rgba(47,108,142,1)","line":{"color":"rgba(47,108,142,1)"}},"textfont":{"color":"rgba(47,108,142,1)"},"error_y":{"color":"rgba(47,108,142,1)"},"error_x":{"color":"rgba(47,108,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["fresh dips tapenades","lunch meat","prepared meals","prepared soups salads","tofu meat alternatives"],"y":[43,42,8,10,29],"type":"bar","name":"deli","marker":{"color":"rgba(42,120,142,1)","line":{"color":"rgba(42,120,142,1)"}},"textfont":{"color":"rgba(42,120,142,1)"},"error_y":{"color":"rgba(42,120,142,1)"},"error_x":{"color":"rgba(42,120,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["dry pasta","fresh pasta","grains rice dried goods","instant foods","pasta sauce"],"y":[29,3,16,27,24],"type":"bar","name":"dry goods pasta","marker":{"color":"rgba(37,132,142,1)","line":{"color":"rgba(37,132,142,1)"}},"textfont":{"color":"rgba(37,132,142,1)"},"error_y":{"color":"rgba(37,132,142,1)"},"error_x":{"color":"rgba(37,132,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["frozen appetizers sides","frozen breads doughs","frozen breakfast","frozen meals","frozen meat seafood","frozen pizza","frozen produce","frozen vegan vegetarian","ice cream ice"],"y":[22,7,25,41,7,7,53,10,58],"type":"bar","name":"frozen","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["air fresheners candles","cleaning products","dish detergents","food storage","laundry","paper goods","plates bowls cups flatware","trash bags liners"],"y":[4,9,15,7,11,28,4,4],"type":"bar","name":"household","marker":{"color":"rgba(30,156,137,1)","line":{"color":"rgba(30,156,137,1)"}},"textfont":{"color":"rgba(30,156,137,1)"},"error_y":{"color":"rgba(30,156,137,1)"},"error_x":{"color":"rgba(30,156,137,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["asian foods","indian foods","kosher foods","latino foods"],"y":[21,1,1,9],"type":"bar","name":"international","marker":{"color":"rgba(34,168,132,1)","line":{"color":"rgba(34,168,132,1)"}},"textfont":{"color":"rgba(34,168,132,1)"},"error_y":{"color":"rgba(34,168,132,1)"},"error_x":{"color":"rgba(34,168,132,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["hot dogs bacon sausage","meat counter","packaged meat","packaged poultry","packaged seafood","poultry counter"],"y":[33,8,2,21,1,10],"type":"bar","name":"meat seafood","marker":{"color":"rgba(47,180,124,1)","line":{"color":"rgba(47,180,124,1)"}},"textfont":{"color":"rgba(47,180,124,1)"},"error_y":{"color":"rgba(47,180,124,1)"},"error_x":{"color":"rgba(47,180,124,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["missing"],"y":[9],"type":"bar","name":"missing","marker":{"color":"rgba(67,190,113,1)","line":{"color":"rgba(67,190,113,1)"}},"textfont":{"color":"rgba(67,190,113,1)"},"error_y":{"color":"rgba(67,190,113,1)"},"error_x":{"color":"rgba(67,190,113,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["other"],"y":[9],"type":"bar","name":"other","marker":{"color":"rgba(93,200,99,1)","line":{"color":"rgba(93,200,99,1)"}},"textfont":{"color":"rgba(93,200,99,1)"},"error_y":{"color":"rgba(93,200,99,1)"},"error_x":{"color":"rgba(93,200,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["baking ingredients","condiments","doughs gelatins bake mixes","honeys syrups nectars","marinades meat preparation","oils vinegars","pickled goods olives","preserved dips spreads","salad dressing toppings","spices seasonings","spreads"],"y":[31,18,10,6,10,16,10,18,11,24,37],"type":"bar","name":"pantry","marker":{"color":"rgba(122,209,81,1)","line":{"color":"rgba(122,209,81,1)"}},"textfont":{"color":"rgba(122,209,81,1)"},"error_y":{"color":"rgba(122,209,81,1)"},"error_x":{"color":"rgba(122,209,81,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["beauty","body lotions soap","cold flu allergy","deodorants","digestion","facial care","feminine care","first aid","hair care","muscles joints pain relief","oral hygiene","protein meal replacements","shave needs","skin care","soap","vitamins supplements"],"y":[2,7,4,4,3,1,1,2,1,4,8,2,3,3,9,7],"type":"bar","name":"personal care","marker":{"color":"rgba(154,217,61,1)","line":{"color":"rgba(154,217,61,1)"}},"textfont":{"color":"rgba(154,217,61,1)"},"error_y":{"color":"rgba(154,217,61,1)"},"error_x":{"color":"rgba(154,217,61,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["cat food care","dog food care"],"y":[10,5],"type":"bar","name":"pets","marker":{"color":"rgba(188,223,39,1)","line":{"color":"rgba(188,223,39,1)"}},"textfont":{"color":"rgba(188,223,39,1)"},"error_y":{"color":"rgba(188,223,39,1)"},"error_x":{"color":"rgba(188,223,39,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["fresh fruits","fresh herbs","fresh vegetables","packaged produce","packaged vegetables fruits"],"y":[364,33,361,31,186],"type":"bar","name":"produce","marker":{"color":"rgba(222,227,24,1)","line":{"color":"rgba(222,227,24,1)"}},"textfont":{"color":"rgba(222,227,24,1)"},"error_y":{"color":"rgba(222,227,24,1)"},"error_x":{"color":"rgba(222,227,24,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["candy chocolate","chips pretzels","cookies cakes","crackers","energy granola bars","fruit vegetable snacks","ice cream toppings","mint gum","nuts seeds dried fruit","popcorn jerky","trail mix snack mix"],"y":[29,64,25,51,44,8,1,2,28,18,4],"type":"bar","name":"snacks","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="column-1" class="section level2" data-width="350">
 <h2>Column</h2>
 <div id="chart-b" class="section level3">
 <h3>Chart B</h3>
-<pre class="r"><code>cleaned_data %&gt;%  
-  mutate(department = fct_reorder(department, order_hour_of_day)) |&gt; 
-  plot_ly(y = ~order_hour_of_day, color = ~department, type = &quot;box&quot;, colors = &quot;viridis&quot;) </code></pre>
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1a8cfcd19c92646cad10" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-1a8cfcd19c92646cad10">{"x":{"visdat":{"90ec5e513123":["function () ","plotlyVisDat"]},"cur_data":"90ec5e513123","attrs":{"90ec5e513123":{"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"order_hour_of_day"},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(68,1,84,0.5)","y":[9,9,12,12,12,12,12,12,12,12,7,7,7,7,7,7,7,7,18,10,10,10,10,16,14,14,14,14,14,16,16,12,12,12,13,17,6],"type":"box","name":"babies","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(72,20,102,0.5)","y":[18,10,10,10,10,10,15,8,12,11,10,10,10,10,10,11,7,14,14,14,10,10,14,14,19,12,13,13,14,8,12,14,16,16,17,12,10,10,10,10,13,12,11,11,21,21,21,15,15,15,10,20,11,11,11,19,19,12,11,11,18,11,11,11,11,9,15,14,23,20,9,18,18,11,11,10,10,10,10,10,10,10,10,10,10,9,14,14,14,14,12,21,21,20,14,21,18,22,11,11,14,20,20,10,10,10,10,21,21,21,21,17,17,15,15,15,15,11,11,10,10,12,18,16,16,16,12,12,12,12,17,17],"type":"box","name":"deli","marker":{"color":"rgba(72,20,102,1)","line":{"color":"rgba(72,20,102,1)"}},"line":{"color":"rgba(72,20,102,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(72,37,117,0.5)","y":[8,11,12,10,17,17,17,12,21,15,12,11,12,11,12,20,11,11,11,9,14,9,22,13,13,18,23,17,0,12,16,12],"type":"box","name":"international","marker":{"color":"rgba(72,37,117,1)","line":{"color":"rgba(72,37,117,1)"}},"line":{"color":"rgba(72,37,117,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(70,52,128,0.5)","y":[17,6,13,18,8,10,16,16,12,12,12,11,15,12,6,6,17,14,14,19,12,14,11,3,13,10,10,10,10,19,12,12,13,13,14,8,12,11,16,16,16,16,17,10,10,10,22,22,14,16,21,15,15,10,13,13,19,19,19,14,19,19,12,12,19,21,17,9,15,15,22,15,14,11,11,20,20,17,18,14,14,17,11,11,11,19,19,19,9,9,16,12,15,2,10,13,13,21,14,9,18,16,17,11,14,11,12,11,15,15,8,8,13,13,23,15,11,11,11,11,15,10,10,13,18,16,12,12,17],"type":"box","name":"bakery","marker":{"color":"rgba(70,52,128,1)","line":{"color":"rgba(70,52,128,1)"}},"line":{"color":"rgba(70,52,128,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(65,68,135,0.5)","y":[19,8,8,7,15,11,6,14,7,19,10,12,9,11,14,14,16,16,16,13,12,10,10,15,15,10,22,17,17,8,12,21,15,9,9,9,13,11,14,18,18,18,18,19,19,19,19,12,12,12,17,12,11,15,15,10,8,13,17,17,17,9,21,21,21,21,13,21,21,21,11,11,11,11,12,12,12,12,12,12,6,17,16,12,11,11,12,12,17],"type":"box","name":"breakfast","marker":{"color":"rgba(65,68,135,1)","line":{"color":"rgba(65,68,135,1)"}},"line":{"color":"rgba(65,68,135,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(59,82,139,0.5)","y":[11,11,7,14,12,12,10,10,10,13,13,15,14,14,14,16,16,16,16,18,10,22,12,12,21,20,11,11,11,13,18,18,18,19,19,19,19,12,9,14,14,12,11,11,11,11,11,20,20,13,13,18,18,18,13,17,17,9,9,9,15,15,15,15,21,10,13,13,21,21,21,13,21,18,16,16,13,13,13,13,13,8,11,11,10,10,22,15,2,6,13,13,13,21,21,6,17,17,17,16,10,11,10,12,11,16,12,12,12,12,12],"type":"box","name":"canned goods","marker":{"color":"rgba(59,82,139,1)","line":{"color":"rgba(59,82,139,1)"}},"line":{"color":"rgba(59,82,139,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(53,96,141,0.5)","y":[9,17,17,17,6,6,6,0,0,0,19,13,13,13,18,18,13,10,10,10,10,10,10,8,10,10,10,10,15,16,16,12,11,11,7,7,7,7,17,14,15,15,15,15,12,12,14,10,10,10,15,15,15,15,14,14,14,14,14,11,19,19,19,22,22,22,22,22,14,13,10,10,10,10,10,10,10,10,10,10,10,19,19,19,19,18,12,9,13,13,13,16,16,16,16,16,16,16,16,16,16,12,13,13,13,13,13,13,13,10,10,15,15,15,14,14,8,11,11,11,11,11,14,14,14,14,14,14,14,16,16,16,16,16,16,16,16,16,16,16,12,12,17,17,18,17,10,10,10,10,10,10,10,10,10,10,10,16,16,16,16,16,16,15,15,22,22,22,22,12,12,12,12,12,12,12,12,17,14,8,8,8,8,12,12,12,12,12,7,11,21,21,21,21,21,15,15,15,9,9,9,9,9,10,20,13,13,13,13,13,13,13,13,20,14,14,14,11,15,15,13,13,13,19,19,19,19,18,18,18,18,19,19,19,12,12,12,12,12,12,12,12,12,9,11,17,11,18,9,11,11,12,12,12,12,9,20,10,10,10,10,10,21,21,21,15,15,15,15,4,4,4,4,16,16,16,16,17,11,11,11,11,11,9,9,0,0,9,9,9,15,15,15,15,15,22,22,10,10,15,8,12,12,12,12,11,11,11,11,11,11,15,15,23,23,20,20,14,14,14,14,20,10,10,10,10,7,7,7,9,9,17,17,17,17,17,13,13,18,8,8,8,8,10,10,14,11,16,18,18,18,18,11,13,13,13,13,17,17,17,17,10,11,11,11,16,16,16,9,9,9,9,9,9,12,12,12,13,13,9,15,15,15,15,15,21,21,21,21,2,2,2,2,10,10,21,21,21,21,21,21,23,20,13,13,14,14,9,9,14,14,14,14,14,14,14,14,14,14,14,14,21,18,11,11,22,22,13,13,6,13,16,16,16,17,10,13,18,18,11,11,11,11,11,14,12,12,12,12,12,15,20,20,10,15,15,15,15,18,2,12,15,6,8,8,8,8,8,8,8,17,17,17,17,12,12,12,18,13,13,13,13,13,13,21,21,21,6,6,6,23,17,17,17,17,17,17,17,17,18,18,16,16,16,16,16,0,10,15,15,11,11,11,11,11,11,15,15,15,15,10,10,10,12,12,13,13,13,13,9,9,9,9,9,9,11,12,12,12,12,12,12,18,18,18,11,11,11,16,16,16,16,16,16,16,16,16,14,14,23,12,12,12,17,17,17,12,12,12,12,13],"type":"box","name":"dairy eggs","marker":{"color":"rgba(53,96,141,1)","line":{"color":"rgba(53,96,141,1)"}},"line":{"color":"rgba(53,96,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(47,108,142,0.5)","y":[15,13,13,8,8,8,15,16,16,7,7,15,15,15,7,15,14,11,13,13,16,13,16,16,16,16,16,16,12,13,16,12,21,21,13,13,20,16,11,11,11,9,15,20,20,20,20,12,12,11,10,18,17,17,17,9,9,9,16,21,21,21,10,10,21,20,13,13,21,13,17,13,13,13,8,8,8,10,20,15,15,18,18,8,13,21,15,15,11,15,10,9,9,12,11,11,11,12,12],"type":"box","name":"dry goods pasta","marker":{"color":"rgba(47,108,142,1)","line":{"color":"rgba(47,108,142,1)"}},"line":{"color":"rgba(47,108,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(42,120,142,0.5)","y":[9,17,13,13,18,18,10,7,7,7,7,7,10,12,12,13,15,11,11,11,11,7,14,15,15,15,15,15,18,18,17,14,10,15,15,12,12,14,14,14,11,11,11,11,11,12,10,10,10,19,12,12,12,12,12,14,14,16,16,16,16,16,16,12,12,13,13,17,17,18,17,10,10,13,13,14,12,12,12,12,12,21,21,21,21,15,10,18,18,18,20,20,13,11,11,11,11,11,11,11,11,11,11,11,15,15,15,15,15,13,18,18,18,18,15,15,15,19,12,12,12,12,17,12,11,11,22,9,9,11,20,20,19,4,16,17,11,11,11,11,9,15,20,20,10,10,14,14,14,14,12,12,12,14,18,18,18,18,18,9,7,7,7,9,18,8,14,13,11,19,16,9,9,9,9,9,16,12,13,21,21,21,21,21,18,18,13,16,16,16,13,11,11,14,11,11,20,20,22,22,2,15,8,21,21,17,16,16,16,15,11,11,15,15,15,15,15,10,9,9,12,12,12,12,11,18,16,16,14,9],"type":"box","name":"frozen","marker":{"color":"rgba(42,120,142,1)","line":{"color":"rgba(42,120,142,1)"}},"line":{"color":"rgba(42,120,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(37,132,142,0.5)","y":[9,8,8,8,11,11,11,15,18,15,15,14,14,22,17,11,13,13,13,12,12,12,12,12,11,13,15,15,15,15,15,13,13,8,16,18,20,11,15,18,15,15,12,17,22,22,22,10,16,16,11,15,12,11,11,11,13,10,10,11,17,11,11,13,13,23,9,17,12,13,13,17,10,11,9,9,11,8,8,23,12,12],"type":"box","name":"household","marker":{"color":"rgba(37,132,142,1)","line":{"color":"rgba(37,132,142,1)"}},"line":{"color":"rgba(37,132,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(33,144,141,0.5)","y":[10,12,13,17,16,11,10,16,16],"type":"box","name":"missing","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"line":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(30,156,137,0.5)","y":[19,19,19,13,8,8,10,10,12,16,12,7,12,17,14,14,10,12,11,3,13,13,10,10,10,19,19,16,13,13,13,15,14,12,12,11,14,14,16,16,16,16,16,16,16,16,18,18,18,16,10,10,22,13,16,12,12,21,13,13,15,19,19,19,12,12,16,12,12,12,11,11,11,12,12,12,12,12,12,12,12,20,20,19,15,16,11,11,11,11,11,14,15,20,10,11,11,11,11,14,14,11,11,10,17,17,8,11,18,13,13,16,10,11,11,11,19,19,19,19,16,9,9,16,12,15,15,15,15,15,15,15,21,10,21,21,21,23,20,20,13,13,13,13,9,21,21,18,11,14,14,12,15,15,15,17,17,12,13,13,13,13,21,21,21,21,21,21,21,21,21,16,10,11,11,11,11,11,15,12,9,11,12,18,18,16,16,16,16,12,12],"type":"box","name":"pantry","marker":{"color":"rgba(30,156,137,1)","line":{"color":"rgba(30,156,137,1)"}},"line":{"color":"rgba(30,156,137,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(34,168,132,0.5)","y":[9,9,9,9,9,9,17,17,6,6,6,6,6,6,0,0,0,0,0,0,0,0,0,19,19,13,13,13,13,13,13,13,13,13,13,13,18,18,13,13,13,13,13,10,10,10,10,10,10,10,10,10,10,10,10,8,8,8,8,7,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,22,22,22,12,12,12,15,8,16,16,16,16,12,11,11,11,11,11,11,11,11,11,10,10,11,11,7,7,7,7,7,7,7,7,17,17,17,14,14,14,14,14,14,15,6,6,17,17,14,14,10,10,15,7,7,14,19,19,19,19,15,15,15,15,15,11,11,11,3,22,22,14,14,14,14,13,13,13,13,12,12,12,12,12,12,12,12,12,12,12,12,12,10,10,10,10,10,10,17,12,19,19,19,19,19,19,18,18,18,18,18,18,12,12,12,12,13,16,16,16,16,16,16,16,16,16,16,16,16,12,12,12,12,12,12,12,13,13,13,13,13,13,13,13,13,13,13,13,10,10,14,14,14,14,14,14,14,14,14,14,14,14,14,8,8,8,11,14,14,14,16,16,12,12,12,12,12,12,12,12,12,12,13,13,13,17,17,17,17,18,18,18,12,17,17,17,10,10,10,10,10,10,10,10,22,22,22,22,22,22,22,12,12,12,12,12,12,12,12,12,12,17,17,17,17,17,17,10,10,13,13,14,14,14,16,16,16,16,12,12,12,12,7,7,7,11,11,11,11,11,11,11,11,11,21,15,15,16,16,12,9,9,9,9,9,9,9,9,10,10,10,10,10,10,10,16,20,20,20,20,20,20,20,20,13,13,13,13,13,22,11,11,11,20,20,20,20,20,20,14,14,14,14,14,11,11,11,11,11,11,11,15,15,9,13,13,13,13,13,16,16,16,16,16,16,16,16,19,19,19,18,18,18,19,19,19,19,12,12,12,12,12,12,12,16,16,16,16,16,16,16,12,12,12,12,12,22,17,17,17,17,17,17,11,18,18,18,11,11,11,13,13,13,18,18,18,12,12,12,12,12,12,12,12,9,9,9,9,13,15,15,15,16,16,16,17,17,17,11,11,11,11,11,11,11,11,9,9,9,9,9,9,9,9,9,9,15,15,10,12,12,12,12,15,15,15,15,20,20,20,8,8,8,14,12,12,12,12,12,12,11,11,11,11,11,11,11,11,15,15,23,23,9,9,20,20,20,20,20,20,14,14,14,14,14,14,14,14,20,20,20,20,20,20,10,10,10,10,10,10,10,18,13,9,10,10,10,10,7,7,7,7,7,7,9,9,9,17,17,17,17,17,17,18,18,8,8,10,10,11,11,11,11,16,16,16,18,18,18,18,11,13,13,13,13,13,13,13,13,17,17,17,17,17,17,17,17,17,17,17,17,17,17,10,11,11,11,19,16,16,16,16,9,9,9,9,9,9,9,9,9,9,9,9,16,16,16,12,12,12,13,9,9,9,9,9,15,15,15,15,15,21,21,21,21,21,21,21,21,21,21,21,21,21,2,2,2,2,2,2,2,2,10,10,10,10,10,10,10,10,13,13,13,13,13,21,21,15,23,23,20,20,20,20,20,20,20,20,20,20,20,13,13,13,13,13,14,14,14,14,14,14,14,9,9,14,14,14,14,21,21,18,11,11,11,11,22,22,22,13,13,13,13,13,13,13,13,6,6,6,6,16,16,16,16,16,17,10,10,10,10,10,10,10,10,10,10,10,13,13,13,13,13,13,13,13,13,13,13,13,13,13,18,18,8,8,8,8,11,11,11,10,10,10,10,10,10,10,10,10,10,10,14,14,11,12,20,20,20,20,15,15,15,15,15,18,18,18,18,18,18,18,2,2,2,2,2,2,6,6,6,8,8,17,17,17,17,17,13,13,13,21,21,21,21,21,21,21,21,21,21,18,6,6,6,6,6,6,23,23,23,23,23,23,23,17,17,17,17,16,16,16,16,16,10,10,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,11,11,11,11,11,11,15,15,15,15,15,10,10,10,10,10,10,10,10,10,10,10,10,10,10,12,13,13,13,13,13,13,13,9,9,9,9,12,12,12,12,12,12,12,18,18,18,18,18,18,18,18,18,11,11,11,11,11,11,11,11,18,18,11,16,16,16,16,16,16,16,16,16,14,23,23,23,12,12,12,12,17,12,12],"type":"box","name":"produce","marker":{"color":"rgba(34,168,132,1)","line":{"color":"rgba(34,168,132,1)"}},"line":{"color":"rgba(34,168,132,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(47,180,124,0.5)","y":[9,9,13,18,18,18,18,8,10,22,15,8,16,16,11,10,11,11,11,7,7,7,7,7,14,15,15,18,18,17,14,15,12,11,19,13,10,10,17,17,9,16,16,16,16,16,13,13,13,13,13,13,10,10,10,15,12,14,16,13,13,12,17,10,15,15,15,22,22,12,17,17,10,13,8,8,8,12,21,21,21,21,21,21,15,9,9,15,15,9,14,12,22,22,22,11,14,11,11,11,11,11,15,13,19,19,19,19,14,19,12,12,17,12,12,16,16,12,12,11,11,11,11,11,11,12,12,13,13,13,13,13,13,13,13,13,16,16,12,12,9,15,15,22,15,15,15,20,20,20,20,20,10,10,10,10,14,14,12,23,14,20,20,13,9,9,10,10,7,7,7,9,13,13,8,8,16,18,11,13,13,13,13,11,11,16,9,9,9,9,9,16,15,15,21,21,21,2,2,2,2,13,13,21,21,21,15,15,23,23,20,18,18,18,18,22,13,13,13,13,13,13,13,16,12,11,11,11,10,10,10,14,14,11,11,12,10,15,18,13,13,13,13,17,17,17,16,15,11,11,11,11,11,11,11,11,10,10,10,10,12,12,13,13,9,18,16,16,14,14,14,12,12,12],"type":"box","name":"snacks","marker":{"color":"rgba(47,180,124,1)","line":{"color":"rgba(47,180,124,1)"}},"line":{"color":"rgba(47,180,124,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(67,190,113,0.5)","y":[17,17,17,18,13,8,8,8,7,16,11,11,11,11,11,11,11,7,14,14,14,15,12,18,6,14,15,14,14,19,19,19,11,11,11,11,11,11,11,10,19,22,22,14,13,17,19,16,13,13,13,12,12,11,16,20,20,20,13,14,16,16,16,16,16,16,13,17,12,10,10,15,22,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,10,10,10,10,13,13,13,8,8,16,12,11,11,21,15,15,14,10,18,20,12,12,12,14,15,19,18,17,16,9,11,11,22,11,9,11,13,13,13,12,9,10,16,16,16,16,12,12,12,12,17,0,14,14,15,15,15,15,10,10,10,12,15,20,14,14,14,11,11,15,23,14,14,10,18,13,9,10,17,17,17,13,13,13,13,17,18,14,13,13,17,17,17,17,17,10,11,9,16,12,12,13,9,13,13,13,21,9,9,14,14,11,11,11,11,22,22,13,13,17,13,18,17,11,10,14,14,11,15,2,15,15,15,12,12,21,21,21,21,21,17,17,0,10,10,10,10,10,10,15,15,15,11,11,11,12,18,19,8,14,23,23,12,12],"type":"box","name":"beverages","marker":{"color":"rgba(67,190,113,1)","line":{"color":"rgba(67,190,113,1)"}},"line":{"color":"rgba(67,190,113,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(93,200,99,0.5)","y":[9,17,17,15,14,14,14,19,11,11,10,14,17,19,16,13,15,12,14,16,16,12,13,15,12,11,9,9,15,19,15,17,12,11,13,12,19,11,15,15,20,14,12,20,20,7,17,18,17,17,16,12,12,9,9,2,10,23,14,18,8,10,14,15,15,18,2,8,17,13,23,11,11,13,13],"type":"box","name":"meat seafood","marker":{"color":"rgba(93,200,99,1)","line":{"color":"rgba(93,200,99,1)"}},"line":{"color":"rgba(93,200,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(122,209,81,0.5)","y":[11,11,11,15,6,6,14,14,14,11,11,11,14,14,14,14,14,12,10,13,21,18,18,18,11,19,12,21,14,14,14,14,13,13,17,17,17,17,17,17,9,12,9,15,22,13,16,16,17,12,12,11,10,22,22,22,15,15,9,11,11],"type":"box","name":"personal care","marker":{"color":"rgba(122,209,81,1)","line":{"color":"rgba(122,209,81,1)"}},"line":{"color":"rgba(122,209,81,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(154,217,61,0.5)","y":[11,15,15,15,15,12,16,16,11,17,11,13,18,10,11],"type":"box","name":"pets","marker":{"color":"rgba(154,217,61,1)","line":{"color":"rgba(154,217,61,1)"}},"line":{"color":"rgba(154,217,61,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(188,223,39,0.5)","y":[11,15,11,19,11,16,19,23],"type":"box","name":"alcohol","marker":{"color":"rgba(188,223,39,1)","line":{"color":"rgba(188,223,39,1)"}},"line":{"color":"rgba(188,223,39,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(222,227,24,0.5)","y":[14,17,21,13],"type":"box","name":"bulk","marker":{"color":"rgba(222,227,24,1)","line":{"color":"rgba(222,227,24,1)"}},"line":{"color":"rgba(222,227,24,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(253,231,37,0.5)","y":[9,17,3,16,18,13,19,23,23],"type":"box","name":"other","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-76be0bc43a0699e08145" style="width:576px;height:460.8px;"></div>
+<script type="application/json" data-for="htmlwidget-76be0bc43a0699e08145">{"x":{"visdat":{"9c1210046fb1":["function () ","plotlyVisDat"]},"cur_data":"9c1210046fb1","attrs":{"9c1210046fb1":{"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"order_hour_of_day"},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(68,1,84,0.5)","y":[9,9,12,12,12,12,12,12,12,12,7,7,7,7,7,7,7,7,18,10,10,10,10,16,14,14,14,14,14,16,16,12,12,12,13,17,6],"type":"box","name":"babies","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(72,20,102,0.5)","y":[18,10,10,10,10,10,15,8,12,11,10,10,10,10,10,11,7,14,14,14,10,10,14,14,19,12,13,13,14,8,12,14,16,16,17,12,10,10,10,10,13,12,11,11,21,21,21,15,15,15,10,20,11,11,11,19,19,12,11,11,18,11,11,11,11,9,15,14,23,20,9,18,18,11,11,10,10,10,10,10,10,10,10,10,10,9,14,14,14,14,12,21,21,20,14,21,18,22,11,11,14,20,20,10,10,10,10,21,21,21,21,17,17,15,15,15,15,11,11,10,10,12,18,16,16,16,12,12,12,12,17,17],"type":"box","name":"deli","marker":{"color":"rgba(72,20,102,1)","line":{"color":"rgba(72,20,102,1)"}},"line":{"color":"rgba(72,20,102,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(72,37,117,0.5)","y":[8,11,12,10,17,17,17,12,21,15,12,11,12,11,12,20,11,11,11,9,14,9,22,13,13,18,23,17,0,12,16,12],"type":"box","name":"international","marker":{"color":"rgba(72,37,117,1)","line":{"color":"rgba(72,37,117,1)"}},"line":{"color":"rgba(72,37,117,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(70,52,128,0.5)","y":[17,6,13,18,8,10,16,16,12,12,12,11,15,12,6,6,17,14,14,19,12,14,11,3,13,10,10,10,10,19,12,12,13,13,14,8,12,11,16,16,16,16,17,10,10,10,22,22,14,16,21,15,15,10,13,13,19,19,19,14,19,19,12,12,19,21,17,9,15,15,22,15,14,11,11,20,20,17,18,14,14,17,11,11,11,19,19,19,9,9,16,12,15,2,10,13,13,21,14,9,18,16,17,11,14,11,12,11,15,15,8,8,13,13,23,15,11,11,11,11,15,10,10,13,18,16,12,12,17],"type":"box","name":"bakery","marker":{"color":"rgba(70,52,128,1)","line":{"color":"rgba(70,52,128,1)"}},"line":{"color":"rgba(70,52,128,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(65,68,135,0.5)","y":[19,8,8,7,15,11,6,14,7,19,10,12,9,11,14,14,16,16,16,13,12,10,10,15,15,10,22,17,17,8,12,21,15,9,9,9,13,11,14,18,18,18,18,19,19,19,19,12,12,12,17,12,11,15,15,10,8,13,17,17,17,9,21,21,21,21,13,21,21,21,11,11,11,11,12,12,12,12,12,12,6,17,16,12,11,11,12,12,17],"type":"box","name":"breakfast","marker":{"color":"rgba(65,68,135,1)","line":{"color":"rgba(65,68,135,1)"}},"line":{"color":"rgba(65,68,135,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(59,82,139,0.5)","y":[11,11,7,14,12,12,10,10,10,13,13,15,14,14,14,16,16,16,16,18,10,22,12,12,21,20,11,11,11,13,18,18,18,19,19,19,19,12,9,14,14,12,11,11,11,11,11,20,20,13,13,18,18,18,13,17,17,9,9,9,15,15,15,15,21,10,13,13,21,21,21,13,21,18,16,16,13,13,13,13,13,8,11,11,10,10,22,15,2,6,13,13,13,21,21,6,17,17,17,16,10,11,10,12,11,16,12,12,12,12,12],"type":"box","name":"canned goods","marker":{"color":"rgba(59,82,139,1)","line":{"color":"rgba(59,82,139,1)"}},"line":{"color":"rgba(59,82,139,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(53,96,141,0.5)","y":[9,17,17,17,6,6,6,0,0,0,19,13,13,13,18,18,13,10,10,10,10,10,10,8,10,10,10,10,15,16,16,12,11,11,7,7,7,7,17,14,15,15,15,15,12,12,14,10,10,10,15,15,15,15,14,14,14,14,14,11,19,19,19,22,22,22,22,22,14,13,10,10,10,10,10,10,10,10,10,10,10,19,19,19,19,18,12,9,13,13,13,16,16,16,16,16,16,16,16,16,16,12,13,13,13,13,13,13,13,10,10,15,15,15,14,14,8,11,11,11,11,11,14,14,14,14,14,14,14,16,16,16,16,16,16,16,16,16,16,16,12,12,17,17,18,17,10,10,10,10,10,10,10,10,10,10,10,16,16,16,16,16,16,15,15,22,22,22,22,12,12,12,12,12,12,12,12,17,14,8,8,8,8,12,12,12,12,12,7,11,21,21,21,21,21,15,15,15,9,9,9,9,9,10,20,13,13,13,13,13,13,13,13,20,14,14,14,11,15,15,13,13,13,19,19,19,19,18,18,18,18,19,19,19,12,12,12,12,12,12,12,12,12,9,11,17,11,18,9,11,11,12,12,12,12,9,20,10,10,10,10,10,21,21,21,15,15,15,15,4,4,4,4,16,16,16,16,17,11,11,11,11,11,9,9,0,0,9,9,9,15,15,15,15,15,22,22,10,10,15,8,12,12,12,12,11,11,11,11,11,11,15,15,23,23,20,20,14,14,14,14,20,10,10,10,10,7,7,7,9,9,17,17,17,17,17,13,13,18,8,8,8,8,10,10,14,11,16,18,18,18,18,11,13,13,13,13,17,17,17,17,10,11,11,11,16,16,16,9,9,9,9,9,9,12,12,12,13,13,9,15,15,15,15,15,21,21,21,21,2,2,2,2,10,10,21,21,21,21,21,21,23,20,13,13,14,14,9,9,14,14,14,14,14,14,14,14,14,14,14,14,21,18,11,11,22,22,13,13,6,13,16,16,16,17,10,13,18,18,11,11,11,11,11,14,12,12,12,12,12,15,20,20,10,15,15,15,15,18,2,12,15,6,8,8,8,8,8,8,8,17,17,17,17,12,12,12,18,13,13,13,13,13,13,21,21,21,6,6,6,23,17,17,17,17,17,17,17,17,18,18,16,16,16,16,16,0,10,15,15,11,11,11,11,11,11,15,15,15,15,10,10,10,12,12,13,13,13,13,9,9,9,9,9,9,11,12,12,12,12,12,12,18,18,18,11,11,11,16,16,16,16,16,16,16,16,16,14,14,23,12,12,12,17,17,17,12,12,12,12,13],"type":"box","name":"dairy eggs","marker":{"color":"rgba(53,96,141,1)","line":{"color":"rgba(53,96,141,1)"}},"line":{"color":"rgba(53,96,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(47,108,142,0.5)","y":[15,13,13,8,8,8,15,16,16,7,7,15,15,15,7,15,14,11,13,13,16,13,16,16,16,16,16,16,12,13,16,12,21,21,13,13,20,16,11,11,11,9,15,20,20,20,20,12,12,11,10,18,17,17,17,9,9,9,16,21,21,21,10,10,21,20,13,13,21,13,17,13,13,13,8,8,8,10,20,15,15,18,18,8,13,21,15,15,11,15,10,9,9,12,11,11,11,12,12],"type":"box","name":"dry goods pasta","marker":{"color":"rgba(47,108,142,1)","line":{"color":"rgba(47,108,142,1)"}},"line":{"color":"rgba(47,108,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(42,120,142,0.5)","y":[9,17,13,13,18,18,10,7,7,7,7,7,10,12,12,13,15,11,11,11,11,7,14,15,15,15,15,15,18,18,17,14,10,15,15,12,12,14,14,14,11,11,11,11,11,12,10,10,10,19,12,12,12,12,12,14,14,16,16,16,16,16,16,12,12,13,13,17,17,18,17,10,10,13,13,14,12,12,12,12,12,21,21,21,21,15,10,18,18,18,20,20,13,11,11,11,11,11,11,11,11,11,11,11,15,15,15,15,15,13,18,18,18,18,15,15,15,19,12,12,12,12,17,12,11,11,22,9,9,11,20,20,19,4,16,17,11,11,11,11,9,15,20,20,10,10,14,14,14,14,12,12,12,14,18,18,18,18,18,9,7,7,7,9,18,8,14,13,11,19,16,9,9,9,9,9,16,12,13,21,21,21,21,21,18,18,13,16,16,16,13,11,11,14,11,11,20,20,22,22,2,15,8,21,21,17,16,16,16,15,11,11,15,15,15,15,15,10,9,9,12,12,12,12,11,18,16,16,14,9],"type":"box","name":"frozen","marker":{"color":"rgba(42,120,142,1)","line":{"color":"rgba(42,120,142,1)"}},"line":{"color":"rgba(42,120,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(37,132,142,0.5)","y":[9,8,8,8,11,11,11,15,18,15,15,14,14,22,17,11,13,13,13,12,12,12,12,12,11,13,15,15,15,15,15,13,13,8,16,18,20,11,15,18,15,15,12,17,22,22,22,10,16,16,11,15,12,11,11,11,13,10,10,11,17,11,11,13,13,23,9,17,12,13,13,17,10,11,9,9,11,8,8,23,12,12],"type":"box","name":"household","marker":{"color":"rgba(37,132,142,1)","line":{"color":"rgba(37,132,142,1)"}},"line":{"color":"rgba(37,132,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(33,144,141,0.5)","y":[10,12,13,17,16,11,10,16,16],"type":"box","name":"missing","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"line":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(30,156,137,0.5)","y":[19,19,19,13,8,8,10,10,12,16,12,7,12,17,14,14,10,12,11,3,13,13,10,10,10,19,19,16,13,13,13,15,14,12,12,11,14,14,16,16,16,16,16,16,16,16,18,18,18,16,10,10,22,13,16,12,12,21,13,13,15,19,19,19,12,12,16,12,12,12,11,11,11,12,12,12,12,12,12,12,12,20,20,19,15,16,11,11,11,11,11,14,15,20,10,11,11,11,11,14,14,11,11,10,17,17,8,11,18,13,13,16,10,11,11,11,19,19,19,19,16,9,9,16,12,15,15,15,15,15,15,15,21,10,21,21,21,23,20,20,13,13,13,13,9,21,21,18,11,14,14,12,15,15,15,17,17,12,13,13,13,13,21,21,21,21,21,21,21,21,21,16,10,11,11,11,11,11,15,12,9,11,12,18,18,16,16,16,16,12,12],"type":"box","name":"pantry","marker":{"color":"rgba(30,156,137,1)","line":{"color":"rgba(30,156,137,1)"}},"line":{"color":"rgba(30,156,137,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(34,168,132,0.5)","y":[9,9,9,9,9,9,17,17,6,6,6,6,6,6,0,0,0,0,0,0,0,0,0,19,19,13,13,13,13,13,13,13,13,13,13,13,18,18,13,13,13,13,13,10,10,10,10,10,10,10,10,10,10,10,10,8,8,8,8,7,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,22,22,22,12,12,12,15,8,16,16,16,16,12,11,11,11,11,11,11,11,11,11,10,10,11,11,7,7,7,7,7,7,7,7,17,17,17,14,14,14,14,14,14,15,6,6,17,17,14,14,10,10,15,7,7,14,19,19,19,19,15,15,15,15,15,11,11,11,3,22,22,14,14,14,14,13,13,13,13,12,12,12,12,12,12,12,12,12,12,12,12,12,10,10,10,10,10,10,17,12,19,19,19,19,19,19,18,18,18,18,18,18,12,12,12,12,13,16,16,16,16,16,16,16,16,16,16,16,16,12,12,12,12,12,12,12,13,13,13,13,13,13,13,13,13,13,13,13,10,10,14,14,14,14,14,14,14,14,14,14,14,14,14,8,8,8,11,14,14,14,16,16,12,12,12,12,12,12,12,12,12,12,13,13,13,17,17,17,17,18,18,18,12,17,17,17,10,10,10,10,10,10,10,10,22,22,22,22,22,22,22,12,12,12,12,12,12,12,12,12,12,17,17,17,17,17,17,10,10,13,13,14,14,14,16,16,16,16,12,12,12,12,7,7,7,11,11,11,11,11,11,11,11,11,21,15,15,16,16,12,9,9,9,9,9,9,9,9,10,10,10,10,10,10,10,16,20,20,20,20,20,20,20,20,13,13,13,13,13,22,11,11,11,20,20,20,20,20,20,14,14,14,14,14,11,11,11,11,11,11,11,15,15,9,13,13,13,13,13,16,16,16,16,16,16,16,16,19,19,19,18,18,18,19,19,19,19,12,12,12,12,12,12,12,16,16,16,16,16,16,16,12,12,12,12,12,22,17,17,17,17,17,17,11,18,18,18,11,11,11,13,13,13,18,18,18,12,12,12,12,12,12,12,12,9,9,9,9,13,15,15,15,16,16,16,17,17,17,11,11,11,11,11,11,11,11,9,9,9,9,9,9,9,9,9,9,15,15,10,12,12,12,12,15,15,15,15,20,20,20,8,8,8,14,12,12,12,12,12,12,11,11,11,11,11,11,11,11,15,15,23,23,9,9,20,20,20,20,20,20,14,14,14,14,14,14,14,14,20,20,20,20,20,20,10,10,10,10,10,10,10,18,13,9,10,10,10,10,7,7,7,7,7,7,9,9,9,17,17,17,17,17,17,18,18,8,8,10,10,11,11,11,11,16,16,16,18,18,18,18,11,13,13,13,13,13,13,13,13,17,17,17,17,17,17,17,17,17,17,17,17,17,17,10,11,11,11,19,16,16,16,16,9,9,9,9,9,9,9,9,9,9,9,9,16,16,16,12,12,12,13,9,9,9,9,9,15,15,15,15,15,21,21,21,21,21,21,21,21,21,21,21,21,21,2,2,2,2,2,2,2,2,10,10,10,10,10,10,10,10,13,13,13,13,13,21,21,15,23,23,20,20,20,20,20,20,20,20,20,20,20,13,13,13,13,13,14,14,14,14,14,14,14,9,9,14,14,14,14,21,21,18,11,11,11,11,22,22,22,13,13,13,13,13,13,13,13,6,6,6,6,16,16,16,16,16,17,10,10,10,10,10,10,10,10,10,10,10,13,13,13,13,13,13,13,13,13,13,13,13,13,13,18,18,8,8,8,8,11,11,11,10,10,10,10,10,10,10,10,10,10,10,14,14,11,12,20,20,20,20,15,15,15,15,15,18,18,18,18,18,18,18,2,2,2,2,2,2,6,6,6,8,8,17,17,17,17,17,13,13,13,21,21,21,21,21,21,21,21,21,21,18,6,6,6,6,6,6,23,23,23,23,23,23,23,17,17,17,17,16,16,16,16,16,10,10,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,11,11,11,11,11,11,15,15,15,15,15,10,10,10,10,10,10,10,10,10,10,10,10,10,10,12,13,13,13,13,13,13,13,9,9,9,9,12,12,12,12,12,12,12,18,18,18,18,18,18,18,18,18,11,11,11,11,11,11,11,11,18,18,11,16,16,16,16,16,16,16,16,16,14,23,23,23,12,12,12,12,17,12,12],"type":"box","name":"produce","marker":{"color":"rgba(34,168,132,1)","line":{"color":"rgba(34,168,132,1)"}},"line":{"color":"rgba(34,168,132,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(47,180,124,0.5)","y":[9,9,13,18,18,18,18,8,10,22,15,8,16,16,11,10,11,11,11,7,7,7,7,7,14,15,15,18,18,17,14,15,12,11,19,13,10,10,17,17,9,16,16,16,16,16,13,13,13,13,13,13,10,10,10,15,12,14,16,13,13,12,17,10,15,15,15,22,22,12,17,17,10,13,8,8,8,12,21,21,21,21,21,21,15,9,9,15,15,9,14,12,22,22,22,11,14,11,11,11,11,11,15,13,19,19,19,19,14,19,12,12,17,12,12,16,16,12,12,11,11,11,11,11,11,12,12,13,13,13,13,13,13,13,13,13,16,16,12,12,9,15,15,22,15,15,15,20,20,20,20,20,10,10,10,10,14,14,12,23,14,20,20,13,9,9,10,10,7,7,7,9,13,13,8,8,16,18,11,13,13,13,13,11,11,16,9,9,9,9,9,16,15,15,21,21,21,2,2,2,2,13,13,21,21,21,15,15,23,23,20,18,18,18,18,22,13,13,13,13,13,13,13,16,12,11,11,11,10,10,10,14,14,11,11,12,10,15,18,13,13,13,13,17,17,17,16,15,11,11,11,11,11,11,11,11,10,10,10,10,12,12,13,13,9,18,16,16,14,14,14,12,12,12],"type":"box","name":"snacks","marker":{"color":"rgba(47,180,124,1)","line":{"color":"rgba(47,180,124,1)"}},"line":{"color":"rgba(47,180,124,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(67,190,113,0.5)","y":[17,17,17,18,13,8,8,8,7,16,11,11,11,11,11,11,11,7,14,14,14,15,12,18,6,14,15,14,14,19,19,19,11,11,11,11,11,11,11,10,19,22,22,14,13,17,19,16,13,13,13,12,12,11,16,20,20,20,13,14,16,16,16,16,16,16,13,17,12,10,10,15,22,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,10,10,10,10,13,13,13,8,8,16,12,11,11,21,15,15,14,10,18,20,12,12,12,14,15,19,18,17,16,9,11,11,22,11,9,11,13,13,13,12,9,10,16,16,16,16,12,12,12,12,17,0,14,14,15,15,15,15,10,10,10,12,15,20,14,14,14,11,11,15,23,14,14,10,18,13,9,10,17,17,17,13,13,13,13,17,18,14,13,13,17,17,17,17,17,10,11,9,16,12,12,13,9,13,13,13,21,9,9,14,14,11,11,11,11,22,22,13,13,17,13,18,17,11,10,14,14,11,15,2,15,15,15,12,12,21,21,21,21,21,17,17,0,10,10,10,10,10,10,15,15,15,11,11,11,12,18,19,8,14,23,23,12,12],"type":"box","name":"beverages","marker":{"color":"rgba(67,190,113,1)","line":{"color":"rgba(67,190,113,1)"}},"line":{"color":"rgba(67,190,113,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(93,200,99,0.5)","y":[9,17,17,15,14,14,14,19,11,11,10,14,17,19,16,13,15,12,14,16,16,12,13,15,12,11,9,9,15,19,15,17,12,11,13,12,19,11,15,15,20,14,12,20,20,7,17,18,17,17,16,12,12,9,9,2,10,23,14,18,8,10,14,15,15,18,2,8,17,13,23,11,11,13,13],"type":"box","name":"meat seafood","marker":{"color":"rgba(93,200,99,1)","line":{"color":"rgba(93,200,99,1)"}},"line":{"color":"rgba(93,200,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(122,209,81,0.5)","y":[11,11,11,15,6,6,14,14,14,11,11,11,14,14,14,14,14,12,10,13,21,18,18,18,11,19,12,21,14,14,14,14,13,13,17,17,17,17,17,17,9,12,9,15,22,13,16,16,17,12,12,11,10,22,22,22,15,15,9,11,11],"type":"box","name":"personal care","marker":{"color":"rgba(122,209,81,1)","line":{"color":"rgba(122,209,81,1)"}},"line":{"color":"rgba(122,209,81,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(154,217,61,0.5)","y":[11,15,15,15,15,12,16,16,11,17,11,13,18,10,11],"type":"box","name":"pets","marker":{"color":"rgba(154,217,61,1)","line":{"color":"rgba(154,217,61,1)"}},"line":{"color":"rgba(154,217,61,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(188,223,39,0.5)","y":[11,15,11,19,11,16,19,23],"type":"box","name":"alcohol","marker":{"color":"rgba(188,223,39,1)","line":{"color":"rgba(188,223,39,1)"}},"line":{"color":"rgba(188,223,39,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(222,227,24,0.5)","y":[14,17,21,13],"type":"box","name":"bulk","marker":{"color":"rgba(222,227,24,1)","line":{"color":"rgba(222,227,24,1)"}},"line":{"color":"rgba(222,227,24,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(253,231,37,0.5)","y":[9,17,3,16,18,13,19,23,23],"type":"box","name":"other","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="chart-c" class="section level3">
 <h3>Chart C</h3>
-<pre class="r"><code>cleaned_data %&gt;%  
-  mutate(text_label = str_c(&quot;Aisle: &quot;, aisle, &quot;Dept: &quot;, department)) %&gt;%
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-13f7dac0896884b9fe47" style="width:576px;height:460.8px;"></div>
+<script type="application/json" data-for="htmlwidget-13f7dac0896884b9fe47">{"x":{"visdat":{"9c1258c9c62":["function () ","plotlyVisDat"]},"cur_data":"9c1258c9c62","attrs":{"9c1258c9c62":{"x":{},"y":{},"mode":"markers","text":{},"color":{},"alpha":0.5,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"department","type":"category","categoryorder":"array","categoryarray":["alcohol","babies","bakery","beverages","breakfast","bulk","canned goods","dairy eggs","deli","dry goods pasta","frozen","household","international","meat seafood","missing","other","pantry","personal care","pets","produce","snacks"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"n"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["alcohol","alcohol","alcohol","alcohol"],"y":[4,1,2,1],"mode":"markers","text":["Aisle: beers coolersDept: alcohol","Aisle: specialty wines champagnesDept: alcohol","Aisle: spiritsDept: alcohol","Aisle: white winesDept: alcohol"],"type":"scatter","name":"alcohol","marker":{"color":"rgba(102,194,165,0.5)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,0.5)"},"error_y":{"color":"rgba(102,194,165,0.5)"},"error_x":{"color":"rgba(102,194,165,0.5)"},"line":{"color":"rgba(102,194,165,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["babies","babies","babies"],"y":[2,34,1],"mode":"markers","text":["Aisle: baby accessoriesDept: babies","Aisle: baby food formulaDept: babies","Aisle: diapers wipesDept: babies"],"type":"scatter","name":"babies","marker":{"color":"rgba(172,179,141,0.5)","line":{"color":"rgba(172,179,141,1)"}},"textfont":{"color":"rgba(172,179,141,0.5)"},"error_y":{"color":"rgba(172,179,141,0.5)"},"error_x":{"color":"rgba(172,179,141,0.5)"},"line":{"color":"rgba(172,179,141,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["bakery","bakery","bakery","bakery","bakery"],"y":[5,60,23,14,27],"mode":"markers","text":["Aisle: bakery dessertsDept: bakery","Aisle: breadDept: bakery","Aisle: breakfast bakeryDept: bakery","Aisle: buns rollsDept: bakery","Aisle: tortillas flat breadDept: bakery"],"type":"scatter","name":"bakery","marker":{"color":"rgba(219,161,118,0.5)","line":{"color":"rgba(219,161,118,1)"}},"textfont":{"color":"rgba(219,161,118,0.5)"},"error_y":{"color":"rgba(219,161,118,0.5)"},"error_x":{"color":"rgba(219,161,118,0.5)"},"line":{"color":"rgba(219,161,118,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["beverages","beverages","beverages","beverages","beverages","beverages","beverages","beverages"],"y":[19,13,6,25,52,31,20,87],"mode":"markers","text":["Aisle: cocoa drink mixesDept: beverages","Aisle: coffeeDept: beverages","Aisle: energy sports drinksDept: beverages","Aisle: juice nectarsDept: beverages","Aisle: refrigeratedDept: beverages","Aisle: soft drinksDept: beverages","Aisle: teaDept: beverages","Aisle: water seltzer sparkling waterDept: beverages"],"type":"scatter","name":"beverages","marker":{"color":"rgba(248,142,103,0.5)","line":{"color":"rgba(248,142,103,1)"}},"textfont":{"color":"rgba(248,142,103,0.5)"},"error_y":{"color":"rgba(248,142,103,0.5)"},"error_x":{"color":"rgba(248,142,103,0.5)"},"line":{"color":"rgba(248,142,103,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["breakfast","breakfast","breakfast","breakfast"],"y":[8,55,15,11],"mode":"markers","text":["Aisle: breakfast bars pastriesDept: breakfast","Aisle: cerealDept: breakfast","Aisle: granolaDept: breakfast","Aisle: hot cereal pancake mixesDept: breakfast"],"type":"scatter","name":"breakfast","marker":{"color":"rgba(217,150,141,0.5)","line":{"color":"rgba(217,150,141,1)"}},"textfont":{"color":"rgba(217,150,141,0.5)"},"error_y":{"color":"rgba(217,150,141,0.5)"},"error_x":{"color":"rgba(217,150,141,0.5)"},"line":{"color":"rgba(217,150,141,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["bulk"],"y":[4],"mode":"markers","text":"Aisle: bulk dried fruits vegetablesDept: bulk","type":"scatter","name":"bulk","marker":{"color":"rgba(178,156,177,0.5)","line":{"color":"rgba(178,156,177,1)"}},"textfont":{"color":"rgba(178,156,177,0.5)"},"error_y":{"color":"rgba(178,156,177,0.5)"},"error_x":{"color":"rgba(178,156,177,0.5)"},"line":{"color":"rgba(178,156,177,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["canned goods","canned goods","canned goods","canned goods","canned goods"],"y":[13,24,29,7,38],"mode":"markers","text":["Aisle: canned fruit applesauceDept: canned goods","Aisle: canned jarred vegetablesDept: canned goods","Aisle: canned meals beansDept: canned goods","Aisle: canned meat seafoodDept: canned goods","Aisle: soup broth bouillonDept: canned goods"],"type":"scatter","name":"canned goods","marker":{"color":"rgba(152,158,202,0.5)","line":{"color":"rgba(152,158,202,1)"}},"textfont":{"color":"rgba(152,158,202,0.5)"},"error_y":{"color":"rgba(152,158,202,0.5)"},"error_x":{"color":"rgba(152,158,202,0.5)"},"line":{"color":"rgba(152,158,202,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["dairy eggs","dairy eggs","dairy eggs","dairy eggs","dairy eggs","dairy eggs","dairy eggs","dairy eggs","dairy eggs","dairy eggs"],"y":[28,35,57,82,29,106,3,64,9,158],"mode":"markers","text":["Aisle: butterDept: dairy eggs","Aisle: creamDept: dairy eggs","Aisle: eggsDept: dairy eggs","Aisle: milkDept: dairy eggs","Aisle: other creams cheesesDept: dairy eggs","Aisle: packaged cheeseDept: dairy eggs","Aisle: refrigerated pudding dessertsDept: dairy eggs","Aisle: soy lactosefreeDept: dairy eggs","Aisle: specialty cheesesDept: dairy eggs","Aisle: yogurtDept: dairy eggs"],"type":"scatter","name":"dairy eggs","marker":{"color":"rgba(185,152,199,0.5)","line":{"color":"rgba(185,152,199,1)"}},"textfont":{"color":"rgba(185,152,199,0.5)"},"error_y":{"color":"rgba(185,152,199,0.5)"},"error_x":{"color":"rgba(185,152,199,0.5)"},"line":{"color":"rgba(185,152,199,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["deli","deli","deli","deli","deli"],"y":[43,42,8,10,29],"mode":"markers","text":["Aisle: fresh dips tapenadesDept: deli","Aisle: lunch meatDept: deli","Aisle: prepared mealsDept: deli","Aisle: prepared soups saladsDept: deli","Aisle: tofu meat alternativesDept: deli"],"type":"scatter","name":"deli","marker":{"color":"rgba(215,144,197,0.5)","line":{"color":"rgba(215,144,197,1)"}},"textfont":{"color":"rgba(215,144,197,0.5)"},"error_y":{"color":"rgba(215,144,197,0.5)"},"error_x":{"color":"rgba(215,144,197,0.5)"},"line":{"color":"rgba(215,144,197,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["dry goods pasta","dry goods pasta","dry goods pasta","dry goods pasta","dry goods pasta"],"y":[29,3,16,27,24],"mode":"markers","text":["Aisle: dry pastaDept: dry goods pasta","Aisle: fresh pastaDept: dry goods pasta","Aisle: grains rice dried goodsDept: dry goods pasta","Aisle: instant foodsDept: dry goods pasta","Aisle: pasta sauceDept: dry goods pasta"],"type":"scatter","name":"dry goods pasta","marker":{"color":"rgba(224,152,180,0.5)","line":{"color":"rgba(224,152,180,1)"}},"textfont":{"color":"rgba(224,152,180,0.5)"},"error_y":{"color":"rgba(224,152,180,0.5)"},"error_x":{"color":"rgba(224,152,180,0.5)"},"line":{"color":"rgba(224,152,180,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["frozen","frozen","frozen","frozen","frozen","frozen","frozen","frozen","frozen"],"y":[22,7,25,41,7,7,53,10,58],"mode":"markers","text":["Aisle: frozen appetizers sidesDept: frozen","Aisle: frozen breads doughsDept: frozen","Aisle: frozen breakfastDept: frozen","Aisle: frozen mealsDept: frozen","Aisle: frozen meat seafoodDept: frozen","Aisle: frozen pizzaDept: frozen","Aisle: frozen produceDept: frozen","Aisle: frozen vegan vegetarianDept: frozen","Aisle: ice cream iceDept: frozen"],"type":"scatter","name":"frozen","marker":{"color":"rgba(205,180,144,0.5)","line":{"color":"rgba(205,180,144,1)"}},"textfont":{"color":"rgba(205,180,144,0.5)"},"error_y":{"color":"rgba(205,180,144,0.5)"},"error_x":{"color":"rgba(205,180,144,0.5)"},"line":{"color":"rgba(205,180,144,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["household","household","household","household","household","household","household","household"],"y":[4,9,15,7,11,28,4,4],"mode":"markers","text":["Aisle: air fresheners candlesDept: household","Aisle: cleaning productsDept: household","Aisle: dish detergentsDept: household","Aisle: food storageDept: household","Aisle: laundryDept: household","Aisle: paper goodsDept: household","Aisle: plates bowls cups flatwareDept: household","Aisle: trash bags linersDept: household"],"type":"scatter","name":"household","marker":{"color":"rgba(180,206,104,0.5)","line":{"color":"rgba(180,206,104,1)"}},"textfont":{"color":"rgba(180,206,104,0.5)"},"error_y":{"color":"rgba(180,206,104,0.5)"},"error_x":{"color":"rgba(180,206,104,0.5)"},"line":{"color":"rgba(180,206,104,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["international","international","international","international"],"y":[21,1,1,9],"mode":"markers","text":["Aisle: asian foodsDept: international","Aisle: indian foodsDept: international","Aisle: kosher foodsDept: international","Aisle: latino foodsDept: international"],"type":"scatter","name":"international","marker":{"color":"rgba(186,217,78,0.5)","line":{"color":"rgba(186,217,78,1)"}},"textfont":{"color":"rgba(186,217,78,0.5)"},"error_y":{"color":"rgba(186,217,78,0.5)"},"error_x":{"color":"rgba(186,217,78,0.5)"},"line":{"color":"rgba(186,217,78,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["meat seafood","meat seafood","meat seafood","meat seafood","meat seafood","meat seafood"],"y":[33,8,2,21,1,10],"mode":"markers","text":["Aisle: hot dogs bacon sausageDept: meat seafood","Aisle: meat counterDept: meat seafood","Aisle: packaged meatDept: meat seafood","Aisle: packaged poultryDept: meat seafood","Aisle: packaged seafoodDept: meat seafood","Aisle: poultry counterDept: meat seafood"],"type":"scatter","name":"meat seafood","marker":{"color":"rgba(217,217,66,0.5)","line":{"color":"rgba(217,217,66,1)"}},"textfont":{"color":"rgba(217,217,66,0.5)"},"error_y":{"color":"rgba(217,217,66,0.5)"},"error_x":{"color":"rgba(217,217,66,0.5)"},"line":{"color":"rgba(217,217,66,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["missing"],"y":[9],"mode":"markers","text":"Aisle: missingDept: missing","type":"scatter","name":"missing","marker":{"color":"rgba(247,217,52,0.5)","line":{"color":"rgba(247,217,52,1)"}},"textfont":{"color":"rgba(247,217,52,0.5)"},"error_y":{"color":"rgba(247,217,52,0.5)"},"error_x":{"color":"rgba(247,217,52,0.5)"},"line":{"color":"rgba(247,217,52,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["other"],"y":[9],"mode":"markers","text":"Aisle: otherDept: other","type":"scatter","name":"other","marker":{"color":"rgba(250,212,80,0.5)","line":{"color":"rgba(250,212,80,1)"}},"textfont":{"color":"rgba(250,212,80,0.5)"},"error_y":{"color":"rgba(250,212,80,0.5)"},"error_x":{"color":"rgba(250,212,80,0.5)"},"line":{"color":"rgba(250,212,80,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["pantry","pantry","pantry","pantry","pantry","pantry","pantry","pantry","pantry","pantry","pantry"],"y":[31,18,10,6,10,16,10,18,11,24,37],"mode":"markers","text":["Aisle: baking ingredientsDept: pantry","Aisle: condimentsDept: pantry","Aisle: doughs gelatins bake mixesDept: pantry","Aisle: honeys syrups nectarsDept: pantry","Aisle: marinades meat preparationDept: pantry","Aisle: oils vinegarsDept: pantry","Aisle: pickled goods olivesDept: pantry","Aisle: preserved dips spreadsDept: pantry","Aisle: salad dressing toppingsDept: pantry","Aisle: spices seasoningsDept: pantry","Aisle: spreadsDept: pantry"],"type":"scatter","name":"pantry","marker":{"color":"rgba(241,204,114,0.5)","line":{"color":"rgba(241,204,114,1)"}},"textfont":{"color":"rgba(241,204,114,0.5)"},"error_y":{"color":"rgba(241,204,114,0.5)"},"error_x":{"color":"rgba(241,204,114,0.5)"},"line":{"color":"rgba(241,204,114,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care"],"y":[2,7,4,4,3,1,1,2,1,4,8,2,3,3,9,7],"mode":"markers","text":["Aisle: beautyDept: personal care","Aisle: body lotions soapDept: personal care","Aisle: cold flu allergyDept: personal care","Aisle: deodorantsDept: personal care","Aisle: digestionDept: personal care","Aisle: facial careDept: personal care","Aisle: feminine careDept: personal care","Aisle: first aidDept: personal care","Aisle: hair careDept: personal care","Aisle: muscles joints pain reliefDept: personal care","Aisle: oral hygieneDept: personal care","Aisle: protein meal replacementsDept: personal care","Aisle: shave needsDept: personal care","Aisle: skin careDept: personal care","Aisle: soapDept: personal care","Aisle: vitamins supplementsDept: personal care"],"type":"scatter","name":"personal care","marker":{"color":"rgba(231,197,144,0.5)","line":{"color":"rgba(231,197,144,1)"}},"textfont":{"color":"rgba(231,197,144,0.5)"},"error_y":{"color":"rgba(231,197,144,0.5)"},"error_x":{"color":"rgba(231,197,144,0.5)"},"line":{"color":"rgba(231,197,144,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["pets","pets"],"y":[10,5],"mode":"markers","text":["Aisle: cat food careDept: pets","Aisle: dog food careDept: pets"],"type":"scatter","name":"pets","marker":{"color":"rgba(215,191,158,0.5)","line":{"color":"rgba(215,191,158,1)"}},"textfont":{"color":"rgba(215,191,158,0.5)"},"error_y":{"color":"rgba(215,191,158,0.5)"},"error_x":{"color":"rgba(215,191,158,0.5)"},"line":{"color":"rgba(215,191,158,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["produce","produce","produce","produce","produce"],"y":[364,33,361,31,186],"mode":"markers","text":["Aisle: fresh fruitsDept: produce","Aisle: fresh herbsDept: produce","Aisle: fresh vegetablesDept: produce","Aisle: packaged produceDept: produce","Aisle: packaged vegetables fruitsDept: produce"],"type":"scatter","name":"produce","marker":{"color":"rgba(198,185,168,0.5)","line":{"color":"rgba(198,185,168,1)"}},"textfont":{"color":"rgba(198,185,168,0.5)"},"error_y":{"color":"rgba(198,185,168,0.5)"},"error_x":{"color":"rgba(198,185,168,0.5)"},"line":{"color":"rgba(198,185,168,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["snacks","snacks","snacks","snacks","snacks","snacks","snacks","snacks","snacks","snacks","snacks"],"y":[29,64,25,51,44,8,1,2,28,18,4],"mode":"markers","text":["Aisle: candy chocolateDept: snacks","Aisle: chips pretzelsDept: snacks","Aisle: cookies cakesDept: snacks","Aisle: crackersDept: snacks","Aisle: energy granola barsDept: snacks","Aisle: fruit vegetable snacksDept: snacks","Aisle: ice cream toppingsDept: snacks","Aisle: mint gumDept: snacks","Aisle: nuts seeds dried fruitDept: snacks","Aisle: popcorn jerkyDept: snacks","Aisle: trail mix snack mixDept: snacks"],"type":"scatter","name":"snacks","marker":{"color":"rgba(179,179,179,0.5)","line":{"color":"rgba(179,179,179,1)"}},"textfont":{"color":"rgba(179,179,179,0.5)"},"error_y":{"color":"rgba(179,179,179,0.5)"},"error_x":{"color":"rgba(179,179,179,0.5)"},"line":{"color":"rgba(179,179,179,0.5)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+</div>
+
+<script>
+$(document).ready(function() {
+  // add bootstrap table styles to pandoc tables
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed table-sm');
+
+  // initialize mathjax
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+  document.getElementsByTagName("head")[0].appendChild(script);
+
+});
+</script>
+
+<div id="flexdashboard-source-code">
+<pre class="line-numbers"><code class="language-r">---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(p8105.datasets)
+
+library(plotly)
+```
+
+```{r filter data, include = FALSE}
+data(instacart) 
+
+cleaned_data = 
+  instacart %&gt;% 
+  mutate(department = factor(department)) %&gt;% 
+  filter(
+         user_id %in% 1:500,
+         !is.na(department),
+         !is.na(aisle),
+         !is.na(order_hour_of_day)
+         )
+```
+
+
+             
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+cleaned_data %&gt;% 
+  count(aisle, department) %&gt;% 
+  mutate(aisle = fct_reorder(aisle, n)) %&gt;% 
+  plot_ly(x = ~aisle, y = ~n, color = ~department, type = "bar", colors = "viridis")
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+cleaned_data %&gt;%  
+  mutate(department = fct_reorder(department, order_hour_of_day)) |&gt; 
+  plot_ly(y = ~order_hour_of_day, color = ~department, type = "box", colors = "viridis") 
+```
+
+### Chart C
+
+```{r}
+cleaned_data %&gt;%  
+  mutate(text_label = str_c("Aisle: ", aisle, "Dept: ", department)) %&gt;%
   count(aisle, department, text_label) %&gt;% 
   mutate(aisle = fct_reorder(aisle, n)) %&gt;% 
   plot_ly(
-    x = ~department, y = ~n, type = &quot;scatter&quot;, mode = &quot;markers&quot;,
-    color = ~department, text = ~text_label, alpha = 0.5)</code></pre>
-<pre><code>## Warning in RColorBrewer::brewer.pal(N, &quot;Set2&quot;): n too large, allowed maximum for palette Set2 is 8
-## Returning the palette you asked for with that many colors
+    x = ~department, y = ~n, type = "scatter", mode = "markers",
+    color = ~department, text = ~text_label, alpha = 0.5)
+```
 
-## Warning in RColorBrewer::brewer.pal(N, &quot;Set2&quot;): n too large, allowed maximum for palette Set2 is 8
-## Returning the palette you asked for with that many colors</code></pre>
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-18909b2531d7b75dbf59" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-18909b2531d7b75dbf59">{"x":{"visdat":{"90ec7f3b3143":["function () ","plotlyVisDat"]},"cur_data":"90ec7f3b3143","attrs":{"90ec7f3b3143":{"x":{},"y":{},"mode":"markers","text":{},"color":{},"alpha":0.5,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"department","type":"category","categoryorder":"array","categoryarray":["alcohol","babies","bakery","beverages","breakfast","bulk","canned goods","dairy eggs","deli","dry goods pasta","frozen","household","international","meat seafood","missing","other","pantry","personal care","pets","produce","snacks"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"n"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["alcohol","alcohol","alcohol","alcohol"],"y":[4,1,2,1],"mode":"markers","text":["Aisle: beers coolersDept: alcohol","Aisle: specialty wines champagnesDept: alcohol","Aisle: spiritsDept: alcohol","Aisle: white winesDept: alcohol"],"type":"scatter","name":"alcohol","marker":{"color":"rgba(102,194,165,0.5)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,0.5)"},"error_y":{"color":"rgba(102,194,165,0.5)"},"error_x":{"color":"rgba(102,194,165,0.5)"},"line":{"color":"rgba(102,194,165,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["babies","babies","babies"],"y":[2,34,1],"mode":"markers","text":["Aisle: baby accessoriesDept: babies","Aisle: baby food formulaDept: babies","Aisle: diapers wipesDept: babies"],"type":"scatter","name":"babies","marker":{"color":"rgba(172,179,141,0.5)","line":{"color":"rgba(172,179,141,1)"}},"textfont":{"color":"rgba(172,179,141,0.5)"},"error_y":{"color":"rgba(172,179,141,0.5)"},"error_x":{"color":"rgba(172,179,141,0.5)"},"line":{"color":"rgba(172,179,141,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["bakery","bakery","bakery","bakery","bakery"],"y":[5,60,23,14,27],"mode":"markers","text":["Aisle: bakery dessertsDept: bakery","Aisle: breadDept: bakery","Aisle: breakfast bakeryDept: bakery","Aisle: buns rollsDept: bakery","Aisle: tortillas flat breadDept: bakery"],"type":"scatter","name":"bakery","marker":{"color":"rgba(219,161,118,0.5)","line":{"color":"rgba(219,161,118,1)"}},"textfont":{"color":"rgba(219,161,118,0.5)"},"error_y":{"color":"rgba(219,161,118,0.5)"},"error_x":{"color":"rgba(219,161,118,0.5)"},"line":{"color":"rgba(219,161,118,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["beverages","beverages","beverages","beverages","beverages","beverages","beverages","beverages"],"y":[19,13,6,25,52,31,20,87],"mode":"markers","text":["Aisle: cocoa drink mixesDept: beverages","Aisle: coffeeDept: beverages","Aisle: energy sports drinksDept: beverages","Aisle: juice nectarsDept: beverages","Aisle: refrigeratedDept: beverages","Aisle: soft drinksDept: beverages","Aisle: teaDept: beverages","Aisle: water seltzer sparkling waterDept: beverages"],"type":"scatter","name":"beverages","marker":{"color":"rgba(248,142,103,0.5)","line":{"color":"rgba(248,142,103,1)"}},"textfont":{"color":"rgba(248,142,103,0.5)"},"error_y":{"color":"rgba(248,142,103,0.5)"},"error_x":{"color":"rgba(248,142,103,0.5)"},"line":{"color":"rgba(248,142,103,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["breakfast","breakfast","breakfast","breakfast"],"y":[8,55,15,11],"mode":"markers","text":["Aisle: breakfast bars pastriesDept: breakfast","Aisle: cerealDept: breakfast","Aisle: granolaDept: breakfast","Aisle: hot cereal pancake mixesDept: breakfast"],"type":"scatter","name":"breakfast","marker":{"color":"rgba(217,150,141,0.5)","line":{"color":"rgba(217,150,141,1)"}},"textfont":{"color":"rgba(217,150,141,0.5)"},"error_y":{"color":"rgba(217,150,141,0.5)"},"error_x":{"color":"rgba(217,150,141,0.5)"},"line":{"color":"rgba(217,150,141,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["bulk"],"y":[4],"mode":"markers","text":"Aisle: bulk dried fruits vegetablesDept: bulk","type":"scatter","name":"bulk","marker":{"color":"rgba(178,156,177,0.5)","line":{"color":"rgba(178,156,177,1)"}},"textfont":{"color":"rgba(178,156,177,0.5)"},"error_y":{"color":"rgba(178,156,177,0.5)"},"error_x":{"color":"rgba(178,156,177,0.5)"},"line":{"color":"rgba(178,156,177,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["canned goods","canned goods","canned goods","canned goods","canned goods"],"y":[13,24,29,7,38],"mode":"markers","text":["Aisle: canned fruit applesauceDept: canned goods","Aisle: canned jarred vegetablesDept: canned goods","Aisle: canned meals beansDept: canned goods","Aisle: canned meat seafoodDept: canned goods","Aisle: soup broth bouillonDept: canned goods"],"type":"scatter","name":"canned goods","marker":{"color":"rgba(152,158,202,0.5)","line":{"color":"rgba(152,158,202,1)"}},"textfont":{"color":"rgba(152,158,202,0.5)"},"error_y":{"color":"rgba(152,158,202,0.5)"},"error_x":{"color":"rgba(152,158,202,0.5)"},"line":{"color":"rgba(152,158,202,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["dairy eggs","dairy eggs","dairy eggs","dairy eggs","dairy eggs","dairy eggs","dairy eggs","dairy eggs","dairy eggs","dairy eggs"],"y":[28,35,57,82,29,106,3,64,9,158],"mode":"markers","text":["Aisle: butterDept: dairy eggs","Aisle: creamDept: dairy eggs","Aisle: eggsDept: dairy eggs","Aisle: milkDept: dairy eggs","Aisle: other creams cheesesDept: dairy eggs","Aisle: packaged cheeseDept: dairy eggs","Aisle: refrigerated pudding dessertsDept: dairy eggs","Aisle: soy lactosefreeDept: dairy eggs","Aisle: specialty cheesesDept: dairy eggs","Aisle: yogurtDept: dairy eggs"],"type":"scatter","name":"dairy eggs","marker":{"color":"rgba(185,152,199,0.5)","line":{"color":"rgba(185,152,199,1)"}},"textfont":{"color":"rgba(185,152,199,0.5)"},"error_y":{"color":"rgba(185,152,199,0.5)"},"error_x":{"color":"rgba(185,152,199,0.5)"},"line":{"color":"rgba(185,152,199,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["deli","deli","deli","deli","deli"],"y":[43,42,8,10,29],"mode":"markers","text":["Aisle: fresh dips tapenadesDept: deli","Aisle: lunch meatDept: deli","Aisle: prepared mealsDept: deli","Aisle: prepared soups saladsDept: deli","Aisle: tofu meat alternativesDept: deli"],"type":"scatter","name":"deli","marker":{"color":"rgba(215,144,197,0.5)","line":{"color":"rgba(215,144,197,1)"}},"textfont":{"color":"rgba(215,144,197,0.5)"},"error_y":{"color":"rgba(215,144,197,0.5)"},"error_x":{"color":"rgba(215,144,197,0.5)"},"line":{"color":"rgba(215,144,197,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["dry goods pasta","dry goods pasta","dry goods pasta","dry goods pasta","dry goods pasta"],"y":[29,3,16,27,24],"mode":"markers","text":["Aisle: dry pastaDept: dry goods pasta","Aisle: fresh pastaDept: dry goods pasta","Aisle: grains rice dried goodsDept: dry goods pasta","Aisle: instant foodsDept: dry goods pasta","Aisle: pasta sauceDept: dry goods pasta"],"type":"scatter","name":"dry goods pasta","marker":{"color":"rgba(224,152,180,0.5)","line":{"color":"rgba(224,152,180,1)"}},"textfont":{"color":"rgba(224,152,180,0.5)"},"error_y":{"color":"rgba(224,152,180,0.5)"},"error_x":{"color":"rgba(224,152,180,0.5)"},"line":{"color":"rgba(224,152,180,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["frozen","frozen","frozen","frozen","frozen","frozen","frozen","frozen","frozen"],"y":[22,7,25,41,7,7,53,10,58],"mode":"markers","text":["Aisle: frozen appetizers sidesDept: frozen","Aisle: frozen breads doughsDept: frozen","Aisle: frozen breakfastDept: frozen","Aisle: frozen mealsDept: frozen","Aisle: frozen meat seafoodDept: frozen","Aisle: frozen pizzaDept: frozen","Aisle: frozen produceDept: frozen","Aisle: frozen vegan vegetarianDept: frozen","Aisle: ice cream iceDept: frozen"],"type":"scatter","name":"frozen","marker":{"color":"rgba(205,180,144,0.5)","line":{"color":"rgba(205,180,144,1)"}},"textfont":{"color":"rgba(205,180,144,0.5)"},"error_y":{"color":"rgba(205,180,144,0.5)"},"error_x":{"color":"rgba(205,180,144,0.5)"},"line":{"color":"rgba(205,180,144,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["household","household","household","household","household","household","household","household"],"y":[4,9,15,7,11,28,4,4],"mode":"markers","text":["Aisle: air fresheners candlesDept: household","Aisle: cleaning productsDept: household","Aisle: dish detergentsDept: household","Aisle: food storageDept: household","Aisle: laundryDept: household","Aisle: paper goodsDept: household","Aisle: plates bowls cups flatwareDept: household","Aisle: trash bags linersDept: household"],"type":"scatter","name":"household","marker":{"color":"rgba(180,206,104,0.5)","line":{"color":"rgba(180,206,104,1)"}},"textfont":{"color":"rgba(180,206,104,0.5)"},"error_y":{"color":"rgba(180,206,104,0.5)"},"error_x":{"color":"rgba(180,206,104,0.5)"},"line":{"color":"rgba(180,206,104,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["international","international","international","international"],"y":[21,1,1,9],"mode":"markers","text":["Aisle: asian foodsDept: international","Aisle: indian foodsDept: international","Aisle: kosher foodsDept: international","Aisle: latino foodsDept: international"],"type":"scatter","name":"international","marker":{"color":"rgba(186,217,78,0.5)","line":{"color":"rgba(186,217,78,1)"}},"textfont":{"color":"rgba(186,217,78,0.5)"},"error_y":{"color":"rgba(186,217,78,0.5)"},"error_x":{"color":"rgba(186,217,78,0.5)"},"line":{"color":"rgba(186,217,78,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["meat seafood","meat seafood","meat seafood","meat seafood","meat seafood","meat seafood"],"y":[33,8,2,21,1,10],"mode":"markers","text":["Aisle: hot dogs bacon sausageDept: meat seafood","Aisle: meat counterDept: meat seafood","Aisle: packaged meatDept: meat seafood","Aisle: packaged poultryDept: meat seafood","Aisle: packaged seafoodDept: meat seafood","Aisle: poultry counterDept: meat seafood"],"type":"scatter","name":"meat seafood","marker":{"color":"rgba(217,217,66,0.5)","line":{"color":"rgba(217,217,66,1)"}},"textfont":{"color":"rgba(217,217,66,0.5)"},"error_y":{"color":"rgba(217,217,66,0.5)"},"error_x":{"color":"rgba(217,217,66,0.5)"},"line":{"color":"rgba(217,217,66,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["missing"],"y":[9],"mode":"markers","text":"Aisle: missingDept: missing","type":"scatter","name":"missing","marker":{"color":"rgba(247,217,52,0.5)","line":{"color":"rgba(247,217,52,1)"}},"textfont":{"color":"rgba(247,217,52,0.5)"},"error_y":{"color":"rgba(247,217,52,0.5)"},"error_x":{"color":"rgba(247,217,52,0.5)"},"line":{"color":"rgba(247,217,52,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["other"],"y":[9],"mode":"markers","text":"Aisle: otherDept: other","type":"scatter","name":"other","marker":{"color":"rgba(250,212,80,0.5)","line":{"color":"rgba(250,212,80,1)"}},"textfont":{"color":"rgba(250,212,80,0.5)"},"error_y":{"color":"rgba(250,212,80,0.5)"},"error_x":{"color":"rgba(250,212,80,0.5)"},"line":{"color":"rgba(250,212,80,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["pantry","pantry","pantry","pantry","pantry","pantry","pantry","pantry","pantry","pantry","pantry"],"y":[31,18,10,6,10,16,10,18,11,24,37],"mode":"markers","text":["Aisle: baking ingredientsDept: pantry","Aisle: condimentsDept: pantry","Aisle: doughs gelatins bake mixesDept: pantry","Aisle: honeys syrups nectarsDept: pantry","Aisle: marinades meat preparationDept: pantry","Aisle: oils vinegarsDept: pantry","Aisle: pickled goods olivesDept: pantry","Aisle: preserved dips spreadsDept: pantry","Aisle: salad dressing toppingsDept: pantry","Aisle: spices seasoningsDept: pantry","Aisle: spreadsDept: pantry"],"type":"scatter","name":"pantry","marker":{"color":"rgba(241,204,114,0.5)","line":{"color":"rgba(241,204,114,1)"}},"textfont":{"color":"rgba(241,204,114,0.5)"},"error_y":{"color":"rgba(241,204,114,0.5)"},"error_x":{"color":"rgba(241,204,114,0.5)"},"line":{"color":"rgba(241,204,114,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care","personal care"],"y":[2,7,4,4,3,1,1,2,1,4,8,2,3,3,9,7],"mode":"markers","text":["Aisle: beautyDept: personal care","Aisle: body lotions soapDept: personal care","Aisle: cold flu allergyDept: personal care","Aisle: deodorantsDept: personal care","Aisle: digestionDept: personal care","Aisle: facial careDept: personal care","Aisle: feminine careDept: personal care","Aisle: first aidDept: personal care","Aisle: hair careDept: personal care","Aisle: muscles joints pain reliefDept: personal care","Aisle: oral hygieneDept: personal care","Aisle: protein meal replacementsDept: personal care","Aisle: shave needsDept: personal care","Aisle: skin careDept: personal care","Aisle: soapDept: personal care","Aisle: vitamins supplementsDept: personal care"],"type":"scatter","name":"personal care","marker":{"color":"rgba(231,197,144,0.5)","line":{"color":"rgba(231,197,144,1)"}},"textfont":{"color":"rgba(231,197,144,0.5)"},"error_y":{"color":"rgba(231,197,144,0.5)"},"error_x":{"color":"rgba(231,197,144,0.5)"},"line":{"color":"rgba(231,197,144,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["pets","pets"],"y":[10,5],"mode":"markers","text":["Aisle: cat food careDept: pets","Aisle: dog food careDept: pets"],"type":"scatter","name":"pets","marker":{"color":"rgba(215,191,158,0.5)","line":{"color":"rgba(215,191,158,1)"}},"textfont":{"color":"rgba(215,191,158,0.5)"},"error_y":{"color":"rgba(215,191,158,0.5)"},"error_x":{"color":"rgba(215,191,158,0.5)"},"line":{"color":"rgba(215,191,158,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["produce","produce","produce","produce","produce"],"y":[364,33,361,31,186],"mode":"markers","text":["Aisle: fresh fruitsDept: produce","Aisle: fresh herbsDept: produce","Aisle: fresh vegetablesDept: produce","Aisle: packaged produceDept: produce","Aisle: packaged vegetables fruitsDept: produce"],"type":"scatter","name":"produce","marker":{"color":"rgba(198,185,168,0.5)","line":{"color":"rgba(198,185,168,1)"}},"textfont":{"color":"rgba(198,185,168,0.5)"},"error_y":{"color":"rgba(198,185,168,0.5)"},"error_x":{"color":"rgba(198,185,168,0.5)"},"line":{"color":"rgba(198,185,168,0.5)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["snacks","snacks","snacks","snacks","snacks","snacks","snacks","snacks","snacks","snacks","snacks"],"y":[29,64,25,51,44,8,1,2,28,18,4],"mode":"markers","text":["Aisle: candy chocolateDept: snacks","Aisle: chips pretzelsDept: snacks","Aisle: cookies cakesDept: snacks","Aisle: crackersDept: snacks","Aisle: energy granola barsDept: snacks","Aisle: fruit vegetable snacksDept: snacks","Aisle: ice cream toppingsDept: snacks","Aisle: mint gumDept: snacks","Aisle: nuts seeds dried fruitDept: snacks","Aisle: popcorn jerkyDept: snacks","Aisle: trail mix snack mixDept: snacks"],"type":"scatter","name":"snacks","marker":{"color":"rgba(179,179,179,0.5)","line":{"color":"rgba(179,179,179,1)"}},"textfont":{"color":"rgba(179,179,179,0.5)"},"error_y":{"color":"rgba(179,179,179,0.5)"},"error_x":{"color":"rgba(179,179,179,0.5)"},"line":{"color":"rgba(179,179,179,0.5)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+</code></pre>
 </div>
-</div>
-
-
-
-
-</div>
-
-<script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
+<script type="text/javascript">
 $(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
+  FlexDashboard.init({
+    fillPage: true,
+    orientation: "columns",
+    storyboard: false,
+    defaultFigWidth: 576,
+    defaultFigHeight: 460,
+    defaultFigWidthMobile: 360,
+    defaultFigHeightMobile: 460,
+    resize_reload: true
+  });
+  var navbar = $(".navbar").first();
+  var body = $("body").first();
+  var sidebar = $(".section.sidebar").first();
+  function addNavbarPadding() {
+    var navHeight = navbar.outerHeight();
+    body.css("padding-top", (navHeight + 8) + "px");
+    sidebar.css("top", navHeight + "px");
+    var resizeEvent = window.document.createEvent("UIEvents");
+    resizeEvent.initUIEvent("resize", true, false, window, 0);
+    window.dispatchEvent(resizeEvent);
+  }
+  if (!window.Shiny) setTimeout(addNavbarPadding, 100);
+  $(document).on("shiny:idle", function() {
+    setTimeout(addNavbarPadding, 50);
   });
 });
-</script>
-
-<!-- code folding -->
-
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
 </script>
 
 </body>
